@@ -1,0 +1,2 @@
+export const VIEW_PORTFOLIO = 'VIEW_PORTFOLIO'
+export const STORE_PROFILE = 'STORE_PROFILE'
