@@ -15,6 +15,7 @@ export default function Auth() {
                 sessionStorage.removeItem('msg_login');
                 localStorage.setItem('token', response.data.token);
                 await router.push('/dashboard')
+                await location.reload()
             } else {
                 await router.push('/login')
             }
