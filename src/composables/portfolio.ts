@@ -13,7 +13,6 @@ export default function Portfolio() {
     const getPopularPortfolios = () => {
         http.get('getPopularPortfilios').then(response => {
             portfolios.value = response.data
-            console.log(response.data)
         }).catch(error => {
             errors.value = error.message
         })

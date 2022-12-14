@@ -17,6 +17,7 @@ import ChangePassword from '../views/private/ChangePasswordView.vue'
 import SuggestionsView from '../views/private/SuggestionsView.vue'
 import Guard from '../middleware/auth'
 import VerifyToken from '../middleware/verify-token'
+import Remember from '../middleware/remember'
 const routes: RouteRecordRaw[] = [{
     path: '/',
     name: 'PageView',
@@ -24,7 +25,8 @@ const routes: RouteRecordRaw[] = [{
 }, {
     path: '/login',
     name: 'Login',
-    component: LoginView
+    component: LoginView,
+    beforeEnter: Remember.remember
 }, {
     path: '/register',
     name: 'Register',

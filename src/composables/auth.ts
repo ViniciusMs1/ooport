@@ -36,7 +36,6 @@ export default function Auth() {
         await http.post('/user', data).then(response => {
             if (response.status == 200) {
                 if (!response.data.erro) {
-                    console.log(response.data)
                     sessionStorage.setItem('msg_login', 'true')
                     router.push('/login')
                 }
@@ -45,7 +44,6 @@ export default function Auth() {
             }
         }).catch(errors => {
             disabledClick.value = false
-            console.log(errors)
         })
     }
 
