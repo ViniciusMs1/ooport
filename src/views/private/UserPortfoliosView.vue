@@ -1,13 +1,13 @@
 <template>
   <NavBarComponent />
-  <ContentComponent>
+  <LoaderComponent v-if="loading" />
+  <ContentComponent v-else>
     <div class="grid sm:grid-cols-10 gap-4">
       <div class="sm:col-span-3">
         <CardUserComponentVue class="sticky top-10" :profile="profile" />
       </div>
       <div class="sm:col-span-7">
-        <ListPortfolioComponent :portfolios="portfolios" cols="lg:grid-cols-2" :btnEdit="false"
-          :btnLike="true" />
+        <ListPortfolioComponent :portfolios="profile['portfolio']" cols="lg:grid-cols-2" :btnEdit="false" :btnLike="true" />
       </div>
     </div>
   </ContentComponent>
@@ -20,9 +20,10 @@ import NavBarComponent from '../../components/NavBarComponent.vue';
 import ListPortfolioComponent from '../../components/private/ListPortfolioComponent.vue';
 import CardUserComponentVue from '../../components/private/CardUserComponent.vue';
 import Portfolio from "../../composables/portfolio";
+import LoaderComponent from '../../components/LoaderComponent.vue';
 export default defineComponent({
   name: 'UserPortfoliosView',
-  components: { ContentComponent, NavBarComponent, ListPortfolioComponent, CardUserComponentVue },
+  components: { ContentComponent, NavBarComponent, ListPortfolioComponent, CardUserComponentVue, LoaderComponent },
   props: {
     user: {
       required: true,
@@ -30,15 +31,11 @@ export default defineComponent({
     }
   },
   setup(props) {
-    const { profile, viewProfile } = Profile()
-    const { errors, portfolios, getPortfolios } = Portfolio()
-    onMounted(getPortfolios)
+    const { profile, viewProfile, loading } = Profile()
     onMounted(() => viewProfile(props.user))
     return {
       profile,
-      getPortfolios,
-      portfolios,
-      errors,
+      loading
     }
   }
 })

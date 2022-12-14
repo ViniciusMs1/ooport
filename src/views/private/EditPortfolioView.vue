@@ -15,7 +15,10 @@
         </div>
     </ContentComponent>
     <ExplanationComponent :title="explanationTitle" />
-    <ContentComponent>
+
+    <LoaderComponent v-if="loading"/>
+
+    <ContentComponent v-else>
         <FormEditPortfolioComponent @savePortfolio="savePortfolio" :categories='categories' :portfolio='portfolio' />
     </ContentComponent>
 </template>
@@ -28,9 +31,10 @@ import ContentComponent from "../../components/private/ContentComponent.vue"
 import Portfolio from '../../composables/portfolio'
 import Category from '../../composables/category';
 import Profile from '../../composables/profile';
+import LoaderComponent from '../../components/LoaderComponent.vue';
 export default defineComponent({
     name: 'EditPortfolioView',
-    components: { ContentComponent, NavbarComponent, FormEditPortfolioComponent, ExplanationComponent },
+    components: { ContentComponent, NavbarComponent, FormEditPortfolioComponent, ExplanationComponent, LoaderComponent },
     props: {
         id: {
             required: true,
@@ -38,11 +42,12 @@ export default defineComponent({
         }
     },
     setup(props) {
-        const { getPortfolio, portfolio, updatePortfolio, errors } = Portfolio()
-        const { profile, getProfile } = Profile()
+        const { getPortfolio, portfolio, updatePortfolio, errors, disabledClick } = Portfolio()
+        const { profile, getProfile, loading } = Profile()
         const { categories, getCategories } = Category()
         const explanationTitle = ref('Editar portfólio')
         const savePortfolio = async (id: String, files: Object, existing_files: Object) => {
+            disabledClick.value = true
             await updatePortfolio(id, files, existing_files)
         }
         onMounted(() => getPortfolio(props.id))
@@ -54,7 +59,9 @@ export default defineComponent({
             portfolio,
             savePortfolio,
             explanationTitle,
-            profile
+            profile,
+            disabledClick,
+            loading
         }
     }
 })

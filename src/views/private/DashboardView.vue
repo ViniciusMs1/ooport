@@ -1,6 +1,12 @@
 <template>
   <NavbarComponent :profile="profile" :header-title="sectionName" />
-  <ContentComponent>
+
+
+  <LoaderComponent v-if="loading" />
+
+
+
+  <ContentComponent v-else>
     <section class="text-gray-800">
       <div class="container max-w-5xl px-4 py-12 mx-auto">
         <div class="grid gap-4 mx-4 sm:grid-cols-12">
@@ -16,9 +22,6 @@
           <div class="relative col-span-12 px-4 space-y-6 sm:col-span-9">
             <div
               class="col-span-12 space-y-12 relative px-4 sm:col-span-8 sm:space-y-8 sm:before:absolute sm:before:top-2 sm:before:bottom-0 sm:before:w-0.5 sm:before:-left-3 before:bg-gray-300">
-
-
-
               <div v-for="portfolio, key in profile['portfolio']" :key="key"
                 class="flex flex-col sm:relative sm:before:absolute sm:before:top-2 sm:before:w-4 sm:before:h-4 sm:before:rounded-full sm:before:left-[-35px] sm:before:z-[1] before:bg-violet-600">
                 <h3 class="text-xl font-semibold tracking-wide">Portfólio publicado</h3>
@@ -48,11 +51,15 @@ import ContentComponent from '../../components/private/ContentComponent.vue'
 import greatingMessage from '../../lib/greetingMessage'
 import Profile from '../../composables/profile'
 import moment from 'moment'
+import LoaderComponent from "../../components/LoaderComponent.vue";
 export default defineComponent({
   name: 'DashboardView',
-  components: { NavbarComponent, ContentComponent },
+  components: { NavbarComponent, ContentComponent, LoaderComponent },
+  mounted() {
+
+  },
   setup() {
-    const { getProfile, profile } = Profile()
+    const { getProfile, profile, loading } = Profile()
     const sectionName = ref('Dashboard')
     const message = greatingMessage
 
@@ -65,7 +72,8 @@ export default defineComponent({
       profile,
       sectionName,
       message,
-      formatDate
+      formatDate,
+      loading
     }
   }
 })

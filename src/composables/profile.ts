@@ -11,6 +11,18 @@ export default function Profile() {
     const invalid_current_password = ref(false)
     const preview_photo = ref()
     const loading = ref(true)
+    const disabledClick = ref(false)
+
+
+    const sendSuggestions = async (data: any) => {
+        await http.post('suggestions', data, {
+        }).then(response => {
+        }).catch(error => {
+            disabledClick.value = false
+        })
+    }
+
+
 
     const updatePhoto = (form: any, file: any) => {
 
@@ -31,6 +43,7 @@ export default function Profile() {
 
     const getProfile = async () => {
         await http.get('me').then(response => {
+            localStorage.setItem('photo',response.data.photo)
             profile.value = response.data
             loading.value = false
         }).catch(error => {
@@ -41,15 +54,16 @@ export default function Profile() {
     const viewProfile = (user: String) => {
         http.post('viewProfile', { data: user }).then(response => {
             profile.value = response.data
-            console.log(response.data)
+            loading.value = false
         }).catch(error => {
             errors.value = error.message
         })
     }
 
     const updateProfile = async (id: any) => {
+        
         try {
-            await http.patch(`user/${id}`, profile.value)
+            await http.post('update-user', profile.value)
 
             await Swal.fire({
                 title: 'Sucesso',
@@ -114,6 +128,8 @@ export default function Profile() {
         invalid_current_password,
         updatePhoto,
         preview_photo,
-        loading
+        loading,
+        disabledClick,
+        sendSuggestions
     }
 }

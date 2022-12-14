@@ -1,8 +1,15 @@
 <template>
   <div class="mx-auto rounded shadow overflow-hidden sm:rounded-md bg text-gray-300">
+    <span @click="copyLink(profile?.nick)"
+      class="bg-gray-700 cursor-pointer absolute right-4 top-4 rounded-full hover:bg-gray-600 px-2.5 py-2.5 text-xs font-medium">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
+        <path fill-rule="evenodd"
+          d="M15.75 4.5a3 3 0 11.825 2.066l-8.421 4.679a3.002 3.002 0 010 1.51l8.421 4.679a3 3 0 11-.729 1.31l-8.421-4.678a3 3 0 110-4.132l8.421-4.679a3 3 0 01-.096-.755z"
+          clip-rule="evenodd" />
+      </svg>
+
+    </span>
     <div class="flex flex-col items-center pb-10 mt-10">
-
-
       <figure id="profilePhoto" class="relative max-w-sm cursor-pointer">
         <img v-if="preview_photo" class="cursor-pointer mb-3 w-24 h-24 rounded-full shadow-lg" :src="preview_photo"
           alt="Nova foto de perfil" />
@@ -22,7 +29,8 @@
       <input id="photo" class="uploading-image" type="file" accept="image/jpeg/png/jpg" @change=uploadPhoto($event)>
 
 
-      <h5 class="text-xl font-medium text-center">{{ profile?.name }}</h5>
+      <h5 class="text-xl font-bold text-center">{{ profile?.name }}</h5>
+      <span class="text-sm font-medium text-center mt-2">{{ profile?.office }}</span>
       <span class="text-sm font-medium text-center mt-5 p-5 italic">{{ profile?.bio }}</span>
       <ul role="list" class="divide-y divide-gray-200 dark:divide-gray-700 mt-5">
         <li class="py-3 sm:py-4">
@@ -49,18 +57,17 @@
             </p>
           </div>
         </li>
-        <li class="py-3 sm:py-4">
+        <!-- <li class="py-3 sm:py-4">
           <div class="flex items-center space-x-7">
             <div class="flex-1 min-w-0">
               <p class="text-sm font-medium ">
-                Número de curtidas
-              </p>
+                Número de curtidas</p>
             </div>
             <p class="text-sm truncate">
               0
             </p>
           </div>
-        </li>
+        </li> -->
       </ul>
     </div>
   </div>
@@ -87,6 +94,15 @@ export default defineComponent({
     showButton() {
       this.activeButton = !this.activeButton;
     },
+    copyLink(nick) {
+      navigator.share({
+        title: 'Copiar link de perfil',
+        text: 'Compartilhe o link do seu perfil',
+        url: import.meta.env.VITE_LINK_BUTTON_SHARE + nick
+      })
+        .then(() => console.log('Successful share'))
+        .catch((error) => console.log('Error sharing', error));
+    }
   },
   setup() {
     const { updatePhoto, preview_photo } = Profile()

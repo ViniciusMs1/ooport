@@ -71,14 +71,14 @@
 
           <div class="flex items-center">
             <Menu as="div" class="relative inline-block text-left">
-              <div>
+              <!-- <div>
                 <MenuButton
                   class="group inline-flex justify-center text-sm font-medium text-gray-700 hover:text-gray-900">
                   Ordem
                   <ChevronDownIcon class="-mr-1 ml-1 h-5 w-5 flex-shrink-0 text-gray-400 group-hover:text-gray-500"
                     aria-hidden="true" />
                 </MenuButton>
-              </div>
+              </div> -->
 
               <transition enter-active-class="transition ease-out duration-100"
                 enter-from-class="transform opacity-0 scale-95" enter-to-class="transform opacity-100 scale-100"
@@ -90,7 +90,8 @@
                     <MenuItem v-for="option in sortOptions" :key="option.name" v-slot="{ active }">
                     <a :href="option.href"
                       :class="[option.current ? 'font-medium text-gray-900' : 'text-gray-500', active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm']">{{
-                      option.name }}</a>
+                          option.name
+                      }}</a>
                     </MenuItem>
                   </div>
                 </MenuItems>
@@ -132,7 +133,8 @@
                         :id="`filter-${section.id}-${optionIdx}`" :name="`${section.id}[]`" :value="option.value"
                         type="checkbox" class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500" />
                       <label :for="`filter-${section.id}-${optionIdx}`" class="ml-3 text-sm text-gray-600">{{
-                      option.label }}</label>
+                          option.label
+                      }}</label>
                     </div>
                   </div>
                 </DisclosurePanel>

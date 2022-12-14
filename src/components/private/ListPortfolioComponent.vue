@@ -4,8 +4,6 @@
 
 
 
-
-
   <div class="mx-auto sm:px-11">
     <div :class="cols" class="space-y-10 lg:space-y-0 lg:grid lg:gap-x-7 gap-7">
       <div v-for="portfolio, key in portfolios" :key="key" @click="viewPortfolio(portfolio)"

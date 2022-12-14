@@ -89,7 +89,8 @@
             </div>
             <div class="px-4 py-3 bg-gray-50 text-right sm:px-6">
               <button type="submit"
-                class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Salvar</button>
+                class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                Salvar</button>
             </div>
           </div>
         </form>
@@ -158,8 +159,8 @@ export default defineComponent({
   name: 'FormPortfolioComponent',
   emits: ['saveProfile'],
   methods: {
-    saveProfile(id: Number) {
-      this.$emit('saveProfile', id);
+    saveProfile(id: any) {
+      this.$emit('saveProfile', id)
     }
   },
   props: {
@@ -169,7 +170,7 @@ export default defineComponent({
     }
   },
   setup(props) {
-    const { updatePassword, verify_password, invalid_current_password } = Profile()
+    const { updatePassword, verify_password, invalid_current_password, disabledClick } = Profile()
     const form = reactive({
       current_password: '',
       new_password: '',
@@ -178,6 +179,7 @@ export default defineComponent({
 
 
     const updatePasswordC = async () => {
+      disabledClick.value = true
       await updatePassword({ ...form }, props.profile?.id)
       form.current_password = ''
       form.new_password = ''
@@ -188,7 +190,8 @@ export default defineComponent({
       form,
       updatePasswordC,
       verify_password,
-      invalid_current_password
+      invalid_current_password,
+      disabledClick
     }
   }
 

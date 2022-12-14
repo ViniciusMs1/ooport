@@ -1,7 +1,7 @@
 import axios from "axios"
 
 const Http = axios.create({
-    baseURL: "https://ooport.online/api",
+    baseURL: import.meta.env.VITE_BASE_URL,
     headers: {
         'Accept': 'application/json',
         'Content-Type': 'multipart/form-data',

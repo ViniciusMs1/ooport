@@ -1,26 +1,5 @@
 <template>
-  <!--
-    This example requires updating your template:
-
-    ```
-    <html class="h-full bg-gray-50">
-    <body class="h-full">
-    ```
-  -->
-
-
-
-  <!--
-  This component uses @tailwindcss/forms
-
-  yarn add @tailwindcss/forms
-  npm install @tailwindcss/forms
-
-  plugins: [require('@tailwindcss/forms')]
--->
-
   <section class="relative flex flex-wrap lg:h-screen lg:items-center">
-
     <div class="w-full px-4 py-12 lg:w-1/2 sm:px-6 lg:px-8 sm:py-16 lg:py-24">
       <div v-if="show_msg_login" class="text-center my-8 border-l-4 border-green-700 bg-green-50 p-4 text-green-700"
         role="alert">
@@ -36,7 +15,7 @@
         <div>
           <label for="email" class="sr-only">Email</label>
           <div class="relative">
-            <input v-model="form.email" type="email"
+            <input required v-model="form.email" type="email"
               class="w-full p-4 pr-12 text-sm border-gray-200 rounded-lg shadow-sm" placeholder="Informe seu email" />
             <span class="absolute inset-y-0 inline-flex items-center right-4">
               <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-gray-400" fill="none" viewBox="0 0 24 24"
@@ -50,7 +29,7 @@
         <div>
           <label for="password" class="sr-only">Senha</label>
           <div class="relative">
-            <input v-model="form.password" type="password"
+            <input required v-model="form.password" type="password"
               class="w-full p-4 pr-12 text-sm border-gray-200 rounded-lg shadow-sm" placeholder="Informe sua senha" />
             <span class="absolute inset-y-0 inline-flex items-center right-4">
               <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-gray-400" fill="none" viewBox="0 0 24 24"
@@ -77,8 +56,15 @@
             </router-link>
           </p>
           <button type="submit"
-            class="inline-block px-5 py-3 ml-3 text-sm font-medium text-white bg-blue-500 rounded-lg">
-            Acessar
+            class="inline-flex justify-center px-5 py-3 ml-3 text-sm font-medium text-white bg-blue-500 rounded-lg">
+            <svg v-if="disabledClick" class="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none"
+              viewBox="0 0 24 24">
+              <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+              <path class="opacity-75" fill="currentColor"
+                d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z">
+              </path>
+            </svg>
+            {{ disabledClick ? 'Entrando...' : 'Entrar' }}
           </button>
         </div>
       </form>
@@ -95,10 +81,11 @@ import { defineComponent, reactive } from "vue";
 import { LockClosedIcon } from '@vue-hero-icons/outline'
 import fath from '../lib/feathercompt'
 import Auth from '../composables/auth'
+import NavBarComponent from "../components/NavBarComponent.vue";
 fath(LockClosedIcon)
 export default defineComponent({
   name: 'LoginView',
-  components: { LockClosedIcon },
+  components: { LockClosedIcon, NavBarComponent },
   data() {
     return {
       show_msg_login: sessionStorage.getItem('msg_login') ? true : false,
@@ -107,13 +94,14 @@ export default defineComponent({
     }
   },
   setup() {
-    const { profile, login } = Auth()
+    const { profile, login, disabledClick } = Auth()
     const form = reactive({
       email: '',
       password: '',
     })
 
     const loginProfile = async () => {
+      disabledClick.value = true
       await login({ ...form })
     }
 
@@ -121,7 +109,8 @@ export default defineComponent({
       profile,
       login,
       form,
-      loginProfile
+      loginProfile,
+      disabledClick
     }
 
 

@@ -30,7 +30,7 @@ import { objectToString } from "@vue/shared";
                   <MenuButton
                     class="max-w-xs bg-gray-800 rounded-full flex items-center text-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
                     <span class="sr-only">Open user menu</span>
-                    <img class="h-8 w-8 rounded-full" :src="profile?.photo" alt="" />
+                    <img class="h-8 w-8 rounded-full" :src="photo" alt="" />
                   </MenuButton>
                 </div>
                 <transition enter-active-class="transition ease-out duration-100"
@@ -47,7 +47,7 @@ import { objectToString } from "@vue/shared";
                     </MenuItem>
                     <div @click="logout()"
                       :class="[true ? 'cursor-pointer bg-gray-100' : '', 'cursor-pointer block px-4 py-2 text-sm text-gray-700']">
-                      Logout</div>
+                      Sair</div>
                   </MenuItems>
                 </transition>
               </Menu>
@@ -93,7 +93,7 @@ import { objectToString } from "@vue/shared";
               {{ item.name }}</DisclosureButton>
             <div @click="logout()"
               class="cursor-pointer block px-3 py-2 rounded-md text-base font-medium text-gray-400 hover:text-white hover:bg-gray-700">
-              Logout</div>
+              Sair</div>
           </div>
         </div>
       </DisclosurePanel>
@@ -131,6 +131,7 @@ export default defineComponent({
   },
   data() {
     return {
+      photo: localStorage.getItem('photo') ?? '',
       menuShow: false,
       navigation: [
         { name: 'Dashboard', href: '/#/dashboard', current: false },
@@ -138,6 +139,7 @@ export default defineComponent({
         { name: 'Cadastrar portfólio', href: '/#/create-portfolio', current: false },
       ],
       userNavigation: [
+        { name: 'Sugestões', href: '/#/suggestions' },
         { name: 'Meu perfil', href: '/#/my-profile' },
       ]
     }
@@ -158,7 +160,8 @@ export default defineComponent({
 
 
       http.get('logout', { headers: headers }).then(response => {
-        localStorage.removeItem('token');
+        localStorage.removeItem('token')
+        localStorage.removeItem('photo');
         router.push('/login')
       }).catch(errors => {
         console.log(errors)

@@ -7,21 +7,22 @@ export default function Auth() {
     const router = useRouter()
     const errors = ref([])
     const msg = ref()
+    const disabledClick = ref(false)
 
     const login = async (data: any) => {
         try {
             let response = await http.post('login', data)
             if (response.data.token) {
-                sessionStorage.removeItem('msg_login');
-                localStorage.setItem('token', response.data.token);
-                await router.push('/dashboard')
-                await location.reload()
+                sessionStorage.removeItem('msg_login')
+                localStorage.setItem('token', response.data.token)
+                await router.push('/my-profile')
+                location.reload()
             } else {
                 await router.push('/login')
             }
         } catch (e: any) {
             let msg = e.response.data.erro
-
+            disabledClick.value = false
             await Swal.fire({
                 title: 'Falha',
                 text: msg,
@@ -35,12 +36,15 @@ export default function Auth() {
         await http.post('/user', data).then(response => {
             if (response.status == 200) {
                 if (!response.data.erro) {
+                    console.log(response.data)
                     sessionStorage.setItem('msg_login', 'true')
                     router.push('/login')
                 }
+                disabledClick.value = false
                 msg.value = response.data
             }
         }).catch(errors => {
+            disabledClick.value = false
             console.log(errors)
         })
     }
@@ -50,6 +54,7 @@ export default function Auth() {
         login,
         register,
         errors,
-        msg
+        msg,
+        disabledClick
     }
 }

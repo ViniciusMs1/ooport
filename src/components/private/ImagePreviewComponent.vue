@@ -3,8 +3,8 @@
   <div class="sm:flex sm:flex-row grid sm:grid-cols-2 md:grid-cols-5 grid-cols-1">
     <div v-for="teste, key in arrayId" :key="key">
       <div v-if="imgPreview[key]" class="basis-1/2 rounded-lg p-4 shadow-sm shadow-indigo-100">
-        <img v-if="imgPreview[key]" :id="arrayPreview?.[key]" :src="imgPreview[key]"
-          class="h-48 w-full rounded-md object-cover" />
+        <a target="_blank" :href="imgPreview[key]"><img v-if="imgPreview[key]" :id="arrayPreview?.[key]" :src="imgPreview[key]"
+          class="h-48 w-full rounded-md object-cover" /></a>
         <div class="text-center mt-3">
           <div v-if="imgPreview[key]" @click="removePreviewImg(imgPreview[key], key)"
             class="font-medium text-red-500 cursor-pointer">
@@ -30,7 +30,7 @@
   </div>
 </template>
 <script lang="ts">
-import { defineComponent, PropType } from "vue"
+import { defineComponent } from "vue"
 let files: object[] = []
 let existing_files: object[] = []
 export default defineComponent({
@@ -44,8 +44,8 @@ export default defineComponent({
       hidden_btn_add_image: false,
       margin_card_image: '',
       mx_auto_card_image: 'mx-auto',
-      arrayPreview: ['idPreview1', 'idPreview2', 'idPreview3', 'idPreview4', 'idPreview5','idPreview6'],
-      arrayId: ['img1', 'img2', 'img3', 'img4', 'img5','img6']
+      arrayPreview: ['idPreview1', 'idPreview2', 'idPreview3', 'idPreview4', 'idPreview5', 'idPreview6', 'idPreview7', 'idPreview8', 'idPreview9', 'idPreview10'],
+      arrayId: ['img1', 'img2', 'img3', 'img4', 'img5', 'img6', 'img7', 'img8', 'img9', 'img10']
     }
   },
   computed: {
@@ -56,7 +56,7 @@ export default defineComponent({
         this.mx_auto_card_image = ''
       }
 
-      if (this.images?.length > 4) {
+      if (this.images?.length > 9) {
         this.hidden_btn_add_image = true
       }
       files = []
@@ -64,7 +64,7 @@ export default defineComponent({
       this.images?.forEach(function (img) {
         existing_files.push(img)
       });
-      for (let x = 0; x <= 4; x++) {
+      for (let x = 0; x <= 9; x++) {
         if (this.images?.[x]) {
           this.imgPreview[x] = this.images?.[x]
         }
@@ -84,7 +84,7 @@ export default defineComponent({
         this.margin_card_image = 'mt-24'
         this.mx_auto_card_image = ''
       }
-      if (this.imgPreview.length > 4) {
+      if (this.imgPreview.length > 9) {
         this.hidden_btn_add_image = true
       }
       files.unshift(e.target.files[0])
@@ -97,7 +97,7 @@ export default defineComponent({
       if (files.length > 0) {
         files.splice(key, 1)
       }
-      if (this.imgPreview.length < 5) {
+      if (this.imgPreview.length < 10) {
         this.hidden_btn_add_image = false
       }
       if (this.imgPreview.length <= 0) {

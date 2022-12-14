@@ -1,7 +1,10 @@
 <template>
   <NavbarComponent :profile="profile" :header-title="sectionName" />
   <ExplanationComponent :title="sectionName" :description="explanationDescription" />
-  <ContentComponent>
+
+  <LoaderComponent v-if="loading" />
+
+  <ContentComponent v-else>
     <div class="grid sm:grid-cols-10 gap-4">
       <div class="sm:col-span-3">
         <CardProfileComponent class="sticky top-10" :profile="profile" />
@@ -20,15 +23,16 @@ import ExplanationComponent from "../../components/private/ExplanationComponent.
 import ContentComponent from '../../components/private/ContentComponent.vue';
 import CardProfileComponent from '../../components/private/CardProfileComponent.vue';
 import Profile from '../../composables/profile'
+import LoaderComponent from '../../components/LoaderComponent.vue';
 export default defineComponent({
   name: 'MyProfileView',
-  components: { NavbarComponent, FormProfileComponent, ExplanationComponent, ContentComponent, CardProfileComponent },
+  components: { NavbarComponent, FormProfileComponent, ExplanationComponent, ContentComponent, CardProfileComponent, LoaderComponent },
   setup() {
-    const { errors, profile, getProfile, updateProfile } = Profile()
+    const { errors, profile, getProfile, updateProfile, loading } = Profile()
     const sectionName = ref('Meu perfil')
     const explanationDescription = ref('Confira e edite seus dados pessoais quando quiser')
     onMounted(getProfile)
-    const saveProfile = async (id: Number) => {
+    const saveProfile = async (id: any) => {
       await updateProfile(id)
     }
     return {
@@ -39,6 +43,7 @@ export default defineComponent({
       getProfile,
       sectionName,
       explanationDescription,
+      loading
     }
   },
 })

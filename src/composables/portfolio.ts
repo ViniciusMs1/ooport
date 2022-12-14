@@ -10,7 +10,6 @@ export default function Portfolio() {
     const router = useRouter()
     const disabledClick = ref(false)
 
-
     const getPopularPortfolios = () => {
         http.get('getPopularPortfilios').then(response => {
             portfolios.value = response.data
@@ -82,10 +81,9 @@ export default function Portfolio() {
                 icon: 'success',
 
             });
-            await router.push('/edit-portfolio/' + id)
+            await router.push('/my-portfolios')
 
         } catch (e: any) {
-
             await Swal.fire({
                 title: 'Erro',
                 text: "Não foi possível atualizar seu portfólio.",

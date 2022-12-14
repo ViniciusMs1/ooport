@@ -14,6 +14,7 @@ import PrivacyPolicyView from '../views/PrivacyPolicyView.vue'
 import TermsConditionsView from '../views/TermsConditionsView.vue'
 import ForgotPassword from '../views/private/ForgotPasswordView.vue'
 import ChangePassword from '../views/private/ChangePasswordView.vue'
+import SuggestionsView from '../views/private/SuggestionsView.vue'
 import Guard from '../middleware/auth'
 import VerifyToken from '../middleware/verify-token'
 const routes: RouteRecordRaw[] = [{
@@ -86,6 +87,11 @@ const routes: RouteRecordRaw[] = [{
     path: '/:catchAll(.*)',
     name: 'NotFound',
     component: NotFoundView,
+}, {
+    path: '/suggestions',
+    name: 'Suggestions',
+    component: SuggestionsView,
+    beforeEnter: Guard.auth
 }]
 const router = createRouter({
     history: createWebHashHistory(),
