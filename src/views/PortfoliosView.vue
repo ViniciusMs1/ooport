@@ -1,8 +1,10 @@
 <!-- This example requires Tailwind CSS v2.0+ -->
 <template>
   <NavBarComponent />
-
-    <FilterPortfolioComponent />
+   
+      <FilterPortfolioComponent />
+ 
+    
  
 
     <FooterComponent/>

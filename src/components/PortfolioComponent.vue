@@ -3,7 +3,8 @@
     <div class="max-w-2xl mx-auto py-16 sm:py-24 lg:py-32 lg:max-w-none">
       <h2 class="text-2xl font-extrabold text-gray-900">Portfólios populares</h2>
       <div class="mt-6 space-y-12 lg:space-y-0">
-        <ListPortfolioComponent :portfolios=portfolios cols="lg:grid-cols-5" :linkAuthor="true"></ListPortfolioComponent>
+        <ListPortfolioComponent :portfolios=portfolios cols="lg:grid-cols-5" :linkAuthor="true">
+        </ListPortfolioComponent>
       </div>
       <div class="text-center mt-12">
         <router-link to="/portfolios"

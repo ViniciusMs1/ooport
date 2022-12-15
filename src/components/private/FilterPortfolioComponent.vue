@@ -1,6 +1,6 @@
 <template>
-  <div class="bg-white">
-    <div>
+  <div class="">
+    <div class="">
       <!-- Mobile filter dialog -->
       <TransitionRoot as="template" :show="mobileFiltersOpen">
         <Dialog as="div" class="relative z-40 lg:hidden" @close="mobileFiltersOpen = false">
@@ -143,7 +143,7 @@
             <!-- Product grid -->
             <div class="lg:col-span-3">
               <!-- Replace with your content -->
-              <div class="h-96 rounded-lg lg:h-full">
+              <div class="rounded-lg lg:h-full">
                 <ListPortfolioComponent :linkAuthor="true" :portfolios="filterCategories" cols="lg:grid-cols-3"
                   :btnEdit="false" :btnLike="false" />
               </div>
