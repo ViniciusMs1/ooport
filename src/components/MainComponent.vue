@@ -17,7 +17,7 @@
             </h1>
             <p
               class="mt-3 text-base text-gray-500 sm:mt-5 sm:text-lg sm:max-w-xl sm:mx-auto md:mt-5 md:text-xl lg:mx-0">
-              <strong>OOPORT</strong> é uma plataforma open source criado para fins de estudos. Desenvolvida em VueJs 3
+              <strong>OOPORT</strong> é uma plataforma de portfólios criado para fins de estudos. Desenvolvido em VueJs 3
               e Laravel 8.
               <br>
               Crie sua conta e cadastre seus portfólios para que outras pessoas possam visualizar e entrar em contato
