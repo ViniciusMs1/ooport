@@ -7,8 +7,8 @@
         class="mb-3 cursor-pointer block">
         <img alt="Art" :src="portfolio.images[0]" class="rounded-lg sm:h-48 h-36 w-full object-cover" />
         <div class="ml-1">
-          <h3 class="mt-2 text-xl font-bold text-gray-900">{{ portfolio.title }}</h3>
-          <p class="mt-1 max-w-sm text-gray-700">
+          <h3 class="mt-1 text-lg font-bold text-gray-900">{{ portfolio.title }}</h3>
+          <p class="font-bold text-sm max-w-sm text-gray-700">
             {{ portfolio.categories.name }}
           </p>
         </div>
