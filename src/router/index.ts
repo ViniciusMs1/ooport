@@ -26,6 +26,7 @@ const routes: RouteRecordRaw[] = [{
     path: '/login',
     name: 'Login',
     component: LoginView,
+    beforeEnter: Remember.remember
 }, {
     path: '/register',
     name: 'Register',
