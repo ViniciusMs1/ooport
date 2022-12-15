@@ -9,9 +9,11 @@ export default function Auth() {
     const msg = ref()
     const disabledClick = ref(false)
 
-    const login = async (data: any) => {
-        try {
-            let response = await http.post('login', data)
+    const login = (data: any) => {
+
+        http.post('login', data).then(async response => {
+            console.log(response)
+
             if (response.data.token) {
                 sessionStorage.removeItem('msg_login')
                 localStorage.setItem('token', response.data.token)
@@ -20,16 +22,18 @@ export default function Auth() {
             } else {
                 await router.push('/login')
             }
-        } catch (e: any) {
-            let msg = e.response.data.erro
+        }).catch(async error => {
             disabledClick.value = false
             await Swal.fire({
                 title: 'Falha',
-                text: msg,
+                text: 'Email ou senha inválidos',
                 icon: 'warning',
 
             });
-        }
+        })
+
+
+
     }
 
     const register = async (data: any) => {
