@@ -1,21 +1,35 @@
 <template>
 
 
-
-
-
   <div class="mx-auto sm:px-11">
+    <div :class="cols" class="grid sm:grid-cols-5 grid-cols-2 gap-4">
+      <div v-for="portfolio, key in portfolios" :key="key" @click="viewPortfolio(portfolio)"
+        class="mb-3 cursor-pointer block">
+        <img alt="Art" :src="portfolio.images[0]" class="rounded-lg sm:h-48 h-36 w-full object-cover" />
+        <div class="ml-1">
+          <h3 class="mt-2 text-xl font-bold text-gray-900">{{ portfolio.title }}</h3>
+          <p class="mt-1 max-w-sm text-gray-700">
+            {{ portfolio.categories.name }}
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
+  <!-- <div class="mx-auto sm:px-11">
     <div :class="cols" class="space-y-10 lg:space-y-0 lg:grid lg:gap-x-7 gap-7">
       <div v-for="portfolio, key in portfolios" :key="key" @click="viewPortfolio(portfolio)"
         class="cursor-pointer overflow-hidden relative bg-white shadow-lg ring-1 ring-black/5 rounded-xl flex items-center dark:bg-slate-800 dark:highlight-white/5">
-        <img class="absolute -left-6 w-40 h-40 rounded-full shadow-lg"
-          :src="portfolio.images[0]" />
+        <img class="absolute -left-6 w-40 h-40 rounded-full shadow-lg" :src="portfolio.images[0]" />
         <div class="pl-32 my-5 mx-10">
           <strong class="text-slate-900 text-sm font-bold dark:text-slate-200">{{ portfolio.title }}</strong>
           <br>
           <span class="text-slate-500 text-sm font-medium dark:text-slate-400">{{ portfolio.categories.name }}</span>
         </div>
-        <!-- <div class="absolute top-0 right-0 flex">
+        <div class="absolute top-0 right-0 flex">
           <span class="font-bold inline-flex items-center rounded dark:bg-gray-700 dark:text-gray-300">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
               stroke="currentColor" class="w-6 h-6">
@@ -24,10 +38,10 @@
             </svg>
             <span class="mb-1 mr-2 ml-1">{{portfolio.likes_count}}</span>
           </span>
-        </div> -->
+        </div>
       </div>
     </div>
-  </div>
+  </div> -->
 
 
 
@@ -133,8 +147,9 @@
                                       <ExternalLinkIcon></ExternalLinkIcon>
                                     </a></dt>
                                   <dd class="mt-2 text-sm text-gray-500">
-                                    <div class="grid grid-cols-2 grid-rows-2 gap-4 sm:gap-6 lg:gap-8">
-                                      <img v-for="image, key in portfolio?.images" :key="key" :src="image" alt="Galeria portfolio">
+                                    <div class="grid grid-cols-2 grid-rows-2 gap-3 sm:gap-3 lg:gap-3">
+                                      <img v-for="image, key in portfolio?.images" :key="key" :src="image" class="rounded-lg"
+                                        alt="Galeria portfolio">
                                     </div>
                                   </dd>
                                 </div>

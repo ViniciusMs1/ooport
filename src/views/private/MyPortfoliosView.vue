@@ -7,7 +7,7 @@
 
   <div v-else>
     <ContentComponent>
-      <ListPortfolioComponent :portfolios="portfolios" cols="lg:grid-cols-3" :btnEdit="true" :btnLike="false" />
+      <ListPortfolioComponent :portfolios="portfolios" cols="lg:grid-cols-5" :btnEdit="true" :btnLike="false" />
     </ContentComponent>
 
     <ContentComponent v-if="isEmpty">

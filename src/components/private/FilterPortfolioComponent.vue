@@ -144,7 +144,7 @@
             <div class="lg:col-span-3">
               <!-- Replace with your content -->
               <div class="h-96 rounded-lg lg:h-full">
-                <ListPortfolioComponent :linkAuthor="true" :portfolios="filterCategories" cols="lg:grid-cols-2"
+                <ListPortfolioComponent :linkAuthor="true" :portfolios="filterCategories" cols="lg:grid-cols-3"
                   :btnEdit="false" :btnLike="false" />
               </div>
               <!-- /End replace -->
