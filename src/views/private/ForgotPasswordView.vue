@@ -60,7 +60,7 @@
               </router-link>
             </p>
             <button :disabled=disabledClick
-              class="inline-block px-5 py-3 ml-3 text-sm font-medium text-white bg-blue-500 rounded-lg">
+              class="inline-flex px-5 py-3 ml-3 text-sm font-medium text-white bg-blue-500 rounded-lg">
               <svg v-if="disabledClick" class="animate-spin -ml-1 mr-3 h-5 w-5 text-white"
                 xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                 <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
