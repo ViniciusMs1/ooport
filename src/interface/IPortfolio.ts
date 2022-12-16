@@ -12,7 +12,7 @@ export default interface IPortfolio {
     instagram: string,
     images: {},
     owner: IUser,
-    like: ILike,
+    likes: ILike,
     photo: string,
     category: number,
     categories: ICategory

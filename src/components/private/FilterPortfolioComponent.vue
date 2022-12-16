@@ -204,7 +204,8 @@ export default defineComponent({
     const { getPortfolios, portfolios } = Portfolio()
     onMounted(getPortfolios)
     return {
-      portfolios
+      portfolios,
+      
     }
   },
   computed: {
