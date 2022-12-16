@@ -77,12 +77,12 @@
                     <div class="absolute inset-0 px-4 sm:px-6">
                       <div class="h-full" aria-hidden="true">
                         <div class="bg-white">
-                          <div class="cursor-pointer">
+                          <!-- <div class="cursor-pointer">
                             <img
                               src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAABmJLR0QA/wD/AP+gvaeTAAAFSklEQVRoge2YW2wUVRzGv3PmsjN7a7d0WzZQ5AEFITTBRLkIxAv6AJqgaDUGSXgoeMFITAy+mPBiNBGDMRoxGGyIYkiIpRp5MogSQGpIDEVSCChQatvtZRd2Z3Zm51x8sUZ2t+1uu3RJ3F9yXs6c+f+/78y5DlClSpUqVf7PkFIay4eenwuptHDPfZyCzAUlAUgxIiS5qOhaB6AfJsfakuPGeHTTDHDxlPTcJwDcC0LCEDIByD6i+o5AZYfJ0YOXy2rAWfncPVR4ewjoMgxeoUjGfTKTBngW0AzADIPMmJVGbSMlQJtCsm+RE9+mbhG+8oUIF+57ktAXZaJfkOHrAWnfBJgLaAaIbkJGYg6pny0Aclz49O2+Y193T9lAZsWGViLkh/LaOR/tv6RAiLEb6wbknOaMjDalBVHXBU4e/BUA7FUtD4Lx72j8qkmudRnw3LFjUAUiNo+jaZELSreZJw99MWkD1tKn34bn7CDnfw4QJz1e01uQkRjE3UstqdK1RFKNcNZBLv4SIMn+4mOYIciFqywovncDne3vlGwguXT9BnjZ/XrXUT88p+jEo4hwFGz+8hsAqNp9IkRTwyXHgGYg2/yILRVtY6Szo71Qk4IGbix/to5l7T+07pM11EqUnvgfRPQuJqUgylCPMukYgQi8BStuCENpiubMKwCghV5yXfsNOXzdBysBAUy6YPCqSoZ6lCnFsBKQiX5NZrwdhbTmGZDYSZlg22j/ZWMqictZlL6Lfib4lqIM9C45tVhkXQonXXHho0VmUuCeZ/YsXrs4V6+aW+Ey3KenR8g4i2VFkFZS8BptIYCu/9bnGRDgjXAzxh1nwLUNJvis3Po8A0wIcClwpxngUoAV2ETzvwDnI56iZfUCzyoJo1qWc563meSJ9CCuCs3wjOnRVTSuZnAuybXc+jwD0lFOe7phchAQyOlRNxGEwNN0M8udM7mP8pbRJVeOJRljPVkzVPHlc7Q4RhiCscvLLp2+OaEBAGAEn6WD9ZlKCx8tVqje9kD2FNJa0IANZb9t1kimaBUX76k6LCMsLY98VbSBNX+eHuBC7EvWzHQ4gEqWRE3MEUJ+uqa3s+BxtqABAPCkb2fKqHUzur9i4jN6AJYvnBEqxrwPjGlgTW/nMOdy61Btk8UInfahw4mCwdomiwGbH77y25j37AmvlEcaFrTpnvVMfaInMFHbciEBDNfNsV3NPLBu4ELreG3H/AL/EmZbbdW4MByKOdPS8wCGQ7GMRY2u6wPBVyaSV9Rfif2NzYEgs3/yu+lFdel+o6R/MSWSCDZmUr5QN6e+1S2Dv094ES9aS0f9/JDLs8eD2fT8iDVYdhMSwEigwbH04HlHD67eNHDWKua9knR8WTcvrHL2g485i6J23E+lmJTYXAShiPsbbFf1nVX04GPF9PwoJXfkj4D6V3DOLoC3xuy4XxNeqSFugVEVfYFGi0M5ZKeirVtxpqSAkx4JbaHZW4gQuxvchOlnmUnFsVRTxn11GUnpa5tTPfsmE2NKQ/lzc/YDIKw9xN3aejfpL/b0KgjBoF7r2IoxJID1rXZf3imzWKY8Fz9BNKiZdC+V4smZ2WTAN8GQcqmGPj1icaDd75CXNmGgqMk6FmVbTD7Woy0Ecm9EZIw6Zum5gSWAETXgJaiZAejmV7Pxb8qRt6yr4W7Ux1SNH6BS3j+LpwK65ACALFHQq4QsBnpKMnXjdsQHypXztuxJH9DIy4Rg10xhmQDQTwMOBXl9Ox/ZW+5ct21TfR+RZknY9wREQIp1byJ97nblum3sBIyPAF+ldVSpUuUO5m+mpm4k9tficAAAAABJRU5ErkJggg==">
                             <img @click="like"
                               src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAABmJLR0QA/wD/AP+gvaeTAAADOUlEQVRoge3YT4ydUxjH8c/tRFUwo6FUUzoh2oVakKlkIpG0tVGCYIgQrUQssJCQWLCysZYm/ixEIm0jVv6smtCFEGpD/Jmi6t+Coow2TDWjcy3Oc/NOk3vdOe/73hmTvN/k5CT3vM/v/M69zzn3PQ8NDQ0NDQ0NWpnPn4atuBnjWI2V+BE/YB/24GAfnctwN7bgIqzBFA7jfbyOtzGT6a8vLUzgK7Tn0d7EaBed0Ribj8aXuL3ORZyB3XMmmMQTGMMFscjzsRnP41g89ye2z9HZgb9i7Gg8uzliW6G1CU/iwJz5dmFFHYt4LwSnwsxQn5izw2Qbs3go2mx89hzO6qMxhPvwR8S8G15K0cIrIfQ11mfGT0g5PhttBrdlamzAofCwR/6eBneFwO/yF9HhfkWKPFhSY0N4aOOO3ODlim/i3pIGOrwYrQo7wsshydu8uTECP8WyiiaGo1VhGT4PTzf0eqAbt0a/S8rvKhyLVoVZ6eSEW3ICP5FWf1VFA3UyJnn6OCfoSASdOwhHJTlP8vRrTtCJCMraWANmueTpRLfBXnvkaPQjg3BUkpXRT3Ub7LWQzs+3tnY75el46ZpavRbS2VCbardTnquj/6jbYK+F7I9+a+12yrMl+g9zgkals3taeglcbEZwHCel+0sW70inxGM1myrD45KXfWWCb4rgny3urzKMX8LLtjICLSkf29hZn69sng0PH1QRGZPuESdxXQ2mcrk+5p7BlVXFnla8GnS7hw+KS/BbzP1UHYJD2BuC32FdHaJ9WKu4D72l//V63qySqhptfCGVgQbFhYpqzQEDeHFdJ9Wu2tIl5+K6J4g5JmOO75X4z8iZ6KBiz1xbo/Y4fgrtb3BpjdpdWaM4lo/jnho0t+Pv0NwvpdeCcDpeUlRIXsaZJXRW4Jk5OrtVqF9V4VH8EyY+w8aM2CsUBYUZPFK7u0yuwbeSoWmpqvhfhbQWHpbSsrMfxgfscd4M4wVFiuzVPc9XObWI/SrOWSCPWdypKFwcdupL3rb4rHPiTSy4u0xW4w1FEXtntE4R+zWp8r5keEDaM500mpZqwUuSjdI/9SQuX2QvlRnx/yorNTQ0LGX+BTOy3WG1X9GbAAAAAElFTkSuQmCC">
-                          </div>
+                          </div> -->
                           <div
                             class="max-w-2xl mx-auto py-14 px-4 items-center gap-y-16 gap-x-8 sm:px-6 sm:py-14 lg:max-w-7xl lg:px-3">
                             <div>
@@ -149,16 +149,14 @@
                                   <dd class="mt-2 text-sm text-gray-500">{{ portfolio?.instagram }}</dd>
                                 </div>
                                 <div class="border-t border-gray-200 pt-4">
-                                  <dt class="font-medium text-gray-900 inline-flex items-center">Galeria <a
-                                      class="ml-2 mt-1" target="_blank" href="#">
-                                      <ExternalLinkIcon></ExternalLinkIcon>
-                                    </a></dt>
+                                  <dt class="font-medium text-gray-900 inline-flex items-center">Galeria</dt>
                                   <dd class="mt-2 text-sm text-gray-500">
-                                    <Lightgallery class="cursor-pointer grid grid-cols-2 grid-rows-2 gap-3 sm:gap-3 lg:gap-3"
+                                    <Lightgallery
+                                      class="grid grid-cols-2 grid-rows-2 gap-3 sm:gap-3 lg:gap-3"
                                       :settings="{ speed: 500, plugins: plugins }">
 
                                       <img v-for="image, key in portfolio?.images" :key="key" :src="image"
-                                        class="rounded-lg" alt="Galeria portfolio">
+                                        class="cursor-pointer rounded-lg" alt="Galeria portfolio">
                                     </Lightgallery>
                                   </dd>
                                 </div>
@@ -198,13 +196,13 @@ import { RouterLink } from "vue-router";
 import portfolio from "../../composables/portfolio";
 import Lightgallery from 'lightgallery/vue';
 import lgZoom from 'lightgallery/plugins/zoom';
-
+import lgThumbnail from 'lightgallery/plugins/thumbnail';
 feathercompt(HeartIcon)
 feathercompt(XIcon)
 feathercompt(ExternalLinkIcon)
 export default defineComponent({
   name: 'ListPortfolioComponent',
-  components: { lgZoom, Lightgallery, Dialog, DialogPanel, DialogTitle, TransitionChild, TransitionRoot, HeartIcon, XIcon, ExternalLinkIcon, ButtonComponent },
+  components: { lgThumbnail, lgZoom, Lightgallery, Dialog, DialogPanel, DialogTitle, TransitionChild, TransitionRoot, HeartIcon, XIcon, ExternalLinkIcon, ButtonComponent },
 
   props: {
     portfolios: {
@@ -260,6 +258,8 @@ export default defineComponent({
 })
 </script>
 <style lang="css" scoped>
+
 @import url('https://cdnjs.cloudflare.com/ajax/libs/lightgallery/2.7.1-beta.1/css/lightgallery.min.css');
 @import url('https://cdnjs.cloudflare.com/ajax/libs/lightgallery/2.7.0/css/lg-zoom.min.css');
+@import url('https://cdnjs.cloudflare.com/ajax/libs/lightgallery/2.7.1-beta.1/css/lg-thumbnail.min.css');
 </style>
