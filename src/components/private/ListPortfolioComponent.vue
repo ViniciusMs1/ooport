@@ -113,7 +113,7 @@
 
                                 <div v-if="linkAuthor" class="border-t border-gray-200 pt-4">
                                   <dt class="font-medium text-gray-900 inline-flex items-center">Autor(a) <router-link
-                                      :to="`/u/${portfolio?.owner.nick}`" class="ml-2 mt-1" target="_blank">
+                                      :to="`/u/${portfolio?.owner.nick}`" class="ml-2 mt-1">
                                       <ExternalLinkIcon></ExternalLinkIcon>
                                     </router-link>
                                   </dt>
