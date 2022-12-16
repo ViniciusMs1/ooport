@@ -14,15 +14,6 @@ export default function Profile() {
     const disabledClick = ref(false)
 
 
-    const sendSuggestions = async (data: any) => {
-        await http.post('suggestions', data, {
-        }).then(response => {
-        }).catch(error => {
-            disabledClick.value = false
-        })
-    }
-
-
 
     const updatePhoto = (form: any, file: any) => {
 
@@ -130,6 +121,5 @@ export default function Profile() {
         preview_photo,
         loading,
         disabledClick,
-        sendSuggestions
     }
 }
