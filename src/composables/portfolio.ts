@@ -11,11 +11,23 @@ export default function Portfolio() {
     const disabledClick = ref(false)
 
     const getPopularPortfolios = () => {
-        http.get('getPopularPortfilios').then(response => {
-            portfolios.value = response.data
-        }).catch(error => {
-            errors.value = error.message
-        })
+
+        if (localStorage.getItem('token')) {
+            http.get('getPopularPortfilios').then(response => {
+                portfolios.value = response.data
+            }).catch(error => {
+                errors.value = error.message
+            })
+        } else {
+            http.get('getPopularPortfiliosN').then(response => {
+                portfolios.value = response.data
+            }).catch(error => {
+                errors.value = error.message
+            })
+        }
+
+
+
     }
 
 
