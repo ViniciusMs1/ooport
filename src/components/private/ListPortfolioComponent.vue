@@ -76,53 +76,77 @@
                     </div>
                     <hr>
                     <dl class="grid gap-y-5 sm:gap-y-5 mt-5">
-                      <div v-if="linkAuthor" class="">
+                      <div :class="!linkAuthor ? 'grid justify-items-center' : null">
                         <div class=" text-gray-800">
                           <div class="flex justify-between">
-                            <div class="flex space-x-4">
-                              <div>
-                                <img :src="portfolio?.owner?.photo" alt=""
-                                  class="object-cover w-12 h-12 rounded-full bg-gray-500">
-                              </div>
-                              <div>
-                                <h4 class="flex font-bold">{{ portfolio?.owner?.name }}
-                                  <router-link :to="`/u/${portfolio?.owner.nick}`" class="ml-2 mt-1">
-                                    <ExternalLinkIcon></ExternalLinkIcon>
-                                  </router-link>
-                                </h4>
 
-                                <span class="text-xs font-medium text-gray-600">{{ portfolio?.owner?.office }}</span>
-                              </div>
+
+
+                            <div v-if="btnEdit">
+                              <router-link :to="`/edit-portfolio/${portfolio?.id}`"
+                                class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                                Editar
+                                <svg aria-hidden="true" class="ml-2 -mr-1 w-5 h-5" fill="currentColor"
+                                  viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                  <path fill-rule="evenodd"
+                                    d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
+                                    clip-rule="evenodd"></path>
+                                </svg>
+                              </router-link>
                             </div>
 
-                            <div>
 
-
-                              <div v-if="btnLike" class="flex items-center space-x-1 text-red-500 mt-2 mr-4">
-                                {{ loaderLikes }}
-                                <svg v-if="this?.['check']" @click="liked(portfolio?.id)"
-                                  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
-                                  class="cursor-pointer w-8 h-8">
-                                  <path
-                                    d="M11.645 20.91l-.007-.003-.022-.012a15.247 15.247 0 01-.383-.218 25.18 25.18 0 01-4.244-3.17C4.688 15.36 2.25 12.174 2.25 8.25 2.25 5.322 4.714 3 7.688 3A5.5 5.5 0 0112 5.052 5.5 5.5 0 0116.313 3c2.973 0 5.437 2.322 5.437 5.25 0 3.925-2.438 7.111-4.739 9.256a25.175 25.175 0 01-4.244 3.17 15.247 15.247 0 01-.383.219l-.022.012-.007.004-.003.001a.752.752 0 01-.704 0l-.003-.001z" />
-                                </svg>
-                                <svg v-else @click="liked(portfolio?.id)" xmlns="http://www.w3.org/2000/svg" fill="none"
-                                  viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
-                                  class="cursor-pointer w-8 h-8">
-                                  <path stroke-linecap="round" stroke-linejoin="round"
-                                    d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
-                                </svg>
-                                <br>
-                                <!-- <span class="text-lg font-bold">{{ portfolio?.['likes_count_count'] }}</span> -->
-                              </div>
+                            <div v-if="linkAuthor">
+                              <router-link :to="`/u/${portfolio?.owner.nick}`">
+                                <div class="flex space-x-4">
+                                  <div>
+                                    <img :src="portfolio?.owner?.photo" alt=""
+                                      class="object-cover w-12 h-12 rounded-full bg-gray-500">
+                                  </div>
+                                  <div>
+                                    <h4 class="flex font-bold" :class="!portfolio?.owner?.office ? 'mt-3' : null">{{
+                                        portfolio?.owner?.name
+                                    }}
+                                      <div class="mt-1 ml-2">
+                                        <ExternalLinkIcon></ExternalLinkIcon>
+                                      </div>
+                                    </h4>
+                                    <span class="text-xs font-medium text-gray-600">{{ portfolio?.owner?.office
+                                    }}</span>
+                                  </div>
+                                </div>
+                              </router-link>
                             </div>
+
+
+                            <div v-if="btnLike" class="flex items-center space-x-1 text-red-500 mt-2 mr-4">
+                              {{ loaderLikes }}
+                              <svg v-if="this?.['check']" @click="liked(portfolio?.id)"
+                                xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
+                                class="cursor-pointer w-8 h-8">
+                                <path
+                                  d="M11.645 20.91l-.007-.003-.022-.012a15.247 15.247 0 01-.383-.218 25.18 25.18 0 01-4.244-3.17C4.688 15.36 2.25 12.174 2.25 8.25 2.25 5.322 4.714 3 7.688 3A5.5 5.5 0 0112 5.052 5.5 5.5 0 0116.313 3c2.973 0 5.437 2.322 5.437 5.25 0 3.925-2.438 7.111-4.739 9.256a25.175 25.175 0 01-4.244 3.17 15.247 15.247 0 01-.383.219l-.022.012-.007.004-.003.001a.752.752 0 01-.704 0l-.003-.001z" />
+                              </svg>
+                              <svg v-else @click="liked(portfolio?.id)" xmlns="http://www.w3.org/2000/svg" fill="none"
+                                viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+                                class="cursor-pointer w-8 h-8">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                  d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
+                              </svg>
+                              <br>
+                              <!-- <span class="text-lg font-bold">{{ portfolio?.['likes_count_count'] }}</span> -->
+                            </div>
+
+
+
                           </div>
                         </div>
                       </div>
 
 
 
-                      <div v-if="portfolio?.site || portfolio?.github || portfolio?.facebook || portfolio?.instagram" class="grid justify-items-center border-t border-gray-200 pt-5">
+                      <div v-if="portfolio?.site || portfolio?.github || portfolio?.facebook || portfolio?.instagram"
+                        class="grid justify-items-center border-t border-gray-200 pt-5">
                         <div class=" space-x-4 ">
                           <a title="Link Site" v-if="portfolio?.site" target="_blank" :href="portfolio?.site"
                             class="bg-gray-400 p-2 font-semibold text-white inline-flex items-center space-x-2 rounded">
