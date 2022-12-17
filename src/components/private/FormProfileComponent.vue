@@ -12,6 +12,11 @@
                     class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" />
                 </div>
                 <div>
+                  <label for="office" class="block text-sm font-medium text-gray-700 ">Profissão</label>
+                  <input v-model="profile.office" type="text" name="office" id="office"
+                    class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" />
+                </div>
+                <div hidden>
                   <label for="nick" class="block text-sm font-medium text-gray-700 ">Nick</label>
                   <input v-model="profile.nick" type="text" name="nick" id="nick"
                     class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" />
@@ -19,12 +24,8 @@
               </div>
 
               <div class="grid sm:grid-cols-2 grid-cols-1 gap-4">
-                <div>
-                  <label for="office" class="block text-sm font-medium text-gray-700 ">Profissão</label>
-                  <input v-model="profile.office" type="text" name="office" id="office"
-                    class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" />
-                </div>
-                <div>
+                
+                <div hidden>
                   <label for="email" class="block text-sm font-medium text-gray-700 ">Email</label>
                   <input v-model="profile.email" type="email" name="email" id="email"
                     class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" />

@@ -62,7 +62,7 @@
 
 
 
-                          <div>
+                          <div v-if="btnLike">
                             {{ loaderLikes }}
                             <div @click="liked(portfolio?.id)" class="cursor-pointer">
                               <img v-if="this?.['check']"

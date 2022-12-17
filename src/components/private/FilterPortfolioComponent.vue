@@ -1,4 +1,5 @@
 <template>
+  
   <div class="">
     <div class="">
       <!-- Mobile filter dialog -->
@@ -106,6 +107,8 @@
           </div>
         </div>
 
+        
+
         <section aria-labelledby="products-heading" class="pt-6 pb-24">
           <h2 id="products-heading" class="sr-only">Products</h2>
 
@@ -145,7 +148,7 @@
               <!-- Replace with your content -->
               <div class="rounded-lg lg:h-full">
                 <ListPortfolioComponent :linkAuthor="true" :portfolios="filterCategories" cols="lg:grid-cols-3"
-                  :btnEdit="false" :btnLike="false" />
+                  :btnEdit="false" :btnLike="true" />
               </div>
               <!-- /End replace -->
             </div>

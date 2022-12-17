@@ -1,13 +1,8 @@
 <!-- This example requires Tailwind CSS v2.0+ -->
 <template>
   <NavBarComponent />
-   
-      <FilterPortfolioComponent />
- 
-    
- 
-
-    <FooterComponent/>
+  <FilterPortfolioComponent />
+  <FooterComponent />
 </template>
 <script lang="ts">
 import { defineComponent } from 'vue';
