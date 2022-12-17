@@ -15,5 +15,6 @@ export default interface IPortfolio {
     likes: ILike,
     photo: string,
     category: number,
-    categories: ICategory
+    categories: ICategory,
+    
 }

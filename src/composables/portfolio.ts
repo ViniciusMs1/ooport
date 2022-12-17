@@ -32,11 +32,22 @@ export default function Portfolio() {
 
 
     const getPortfolios = () => {
-        http.get('portfolios').then(response => {
-            portfolios.value = response.data
-        }).catch(error => {
-            errors.value = error.message
-        })
+
+        if (localStorage.getItem('token')) {
+            http.get('portfolios').then(response => {
+                portfolios.value = response.data
+            }).catch(error => {
+                errors.value = error.message
+            })
+        } else {
+            http.get('portfoliosN').then(response => {
+                portfolios.value = response.data
+            }).catch(error => {
+                errors.value = error.message
+            })
+        }
+
+
     }
 
     const my_portfolios = () => {

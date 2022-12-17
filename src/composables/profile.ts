@@ -34,7 +34,7 @@ export default function Profile() {
 
     const getProfile = async () => {
         await http.get('me').then(response => {
-            localStorage.setItem('photo',response.data.photo)
+            localStorage.setItem('photo', response.data.photo)
             profile.value = response.data
             loading.value = false
         }).catch(error => {
@@ -43,16 +43,25 @@ export default function Profile() {
     }
 
     const viewProfile = (user: String) => {
-        http.post('viewProfile', { data: user }).then(response => {
-            profile.value = response.data
-            loading.value = false
-        }).catch(error => {
-            errors.value = error.message
-        })
+        if (localStorage.getItem('token')) {
+            http.post('viewProfile', { data: user }).then(response => {
+                profile.value = response.data
+                loading.value = false
+            }).catch(error => {
+                errors.value = error.message
+            })
+        } else {
+            http.post('viewProfileN', { data: user }).then(response => {
+                profile.value = response.data
+                loading.value = false
+            }).catch(error => {
+                errors.value = error.message
+            })
+        }
     }
 
     const updateProfile = async (id: any) => {
-        
+
         try {
             await http.post('update-user', profile.value)
 
