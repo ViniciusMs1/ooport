@@ -7,7 +7,7 @@
     <div :class="cols" class="grid grid-cols-2 gap-4">
       <div v-for="portfolio, key in portfolios" :key="key" @click="viewPortfolio(portfolio)"
         class='shadow-sm cursor-pointer relative block overflow-hidden rounded-xl bg-cover bg-center bg-no-repeat'>
-        <img class="" :src="portfolio.images[0]" alt="">
+        <img class="rounded-lg sm:h-48 h-36 w-full object-cover" :src="portfolio.images[0]" alt="">
         <span
           class="absolute right-4 top-4 z-10 inline-flex items-center rounded-full bg-black px-3 py-1 text-xs font-semibold text-white">
           {{ portfolio['likes_count_count'] }}
@@ -24,9 +24,6 @@
       </div>
     </div>
   </div>
-
-
-
 
 
 
