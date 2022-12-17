@@ -16,5 +16,5 @@ export default interface IPortfolio {
     photo: string,
     category: number,
     categories: ICategory,
-    
+    created_at: string
 }
