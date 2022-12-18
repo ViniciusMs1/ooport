@@ -5,6 +5,7 @@ import router from './router'
 import App from './App.vue'
 import { key, store } from './store'
 import Http from './http'
+import VueAnalytics from 'vue-analytics';
 
 // const loading = ref(true)
 

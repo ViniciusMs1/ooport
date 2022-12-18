@@ -19,6 +19,7 @@
     "lightgallery": "^2.7.0",
     "moment": "^2.29.4",
     "vue": "^3.2.37",
+    "vue-analytics": "^5.22.1",
     "vue-axios": "^3.4.1",
     "vue-media-upload": "^1.1.4",
     "vue-router": "^4.1.3",
