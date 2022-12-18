@@ -12,11 +12,11 @@ export default function Auth() {
     const login = (data: any) => {
 
         http.post('login', data).then(async response => {
-            console.log(response)
-
             if (response.data.token) {
                 sessionStorage.removeItem('msg_login')
                 localStorage.setItem('token', response.data.token)
+                console.log(response)
+                localStorage.setItem('id', response.data.id)
                 await router.push('/my-profile')
                 location.reload()
             } else {

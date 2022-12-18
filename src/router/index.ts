@@ -15,6 +15,7 @@ import TermsConditionsView from '../views/TermsConditionsView.vue'
 import ForgotPassword from '../views/private/ForgotPasswordView.vue'
 import ChangePassword from '../views/private/ChangePasswordView.vue'
 import SuggestionsView from '../views/private/SuggestionsView.vue'
+import FollowersView from '../views/private/FollowersView.vue'
 import Guard from '../middleware/auth'
 import VerifyToken from '../middleware/verify-token'
 import Remember from '../middleware/remember'
@@ -50,6 +51,11 @@ const routes: RouteRecordRaw[] = [{
     path: '/my-profile',
     name: 'MyProfile',
     component: MyProfileView,
+    beforeEnter: Guard.auth
+}, {
+    path: '/followers',
+    name: 'Followers',
+    component: FollowersView,
     beforeEnter: Guard.auth
 }, {
     path: '/portfolios',

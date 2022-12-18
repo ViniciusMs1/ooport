@@ -97,7 +97,7 @@ export default defineComponent({
     copyLink(nick) {
       navigator.share({
         title: 'Copiar link de perfil',
-        text: 'Compartilhe o link do seu perfil',
+        text: 'Oi, veja meus portfólios',
         url: import.meta.env.VITE_LINK_BUTTON_SHARE + nick
       })
         .then(() => console.log('Successful share'))

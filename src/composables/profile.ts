@@ -12,6 +12,7 @@ export default function Profile() {
     const preview_photo = ref()
     const loading = ref(true)
     const disabledClick = ref(false)
+    const btnFollower = ref(true)
 
 
 

@@ -137,6 +137,7 @@ export default defineComponent({
         { name: 'Dashboard', href: '/#/dashboard', current: false },
         { name: 'Meus portfólios', href: '/#/my-portfolios', current: false },
         { name: 'Cadastrar portfólio', href: '/#/create-portfolio', current: false },
+        { name: 'Seguidores', href: '/#/followers', current: false },
       ],
       userNavigation: [
         { name: 'Sugestões', href: '/#/suggestions' },
@@ -161,7 +162,8 @@ export default defineComponent({
 
       http.get('logout', { headers: headers }).then(response => {
         localStorage.removeItem('token')
-        localStorage.removeItem('photo');
+        localStorage.removeItem('photo')
+        localStorage.removeItem('id')
         router.push('/login')
       }).catch(errors => {
         console.log(errors)
