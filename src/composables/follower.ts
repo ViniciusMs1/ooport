@@ -6,6 +6,7 @@ export default function Follower() {
     const isFollowingUser = ref(false)
     const myFollowingUsers = ref([])
     const imFollowingUsers = ref([])
+    const loading = ref(true)
 
 
     const isFollowing = (id: any) => {
@@ -42,6 +43,7 @@ export default function Follower() {
 
     const myFollowing = () => {
         http.get('myFollowing').then(response => {
+            loading.value = false
             myFollowingUsers.value = response.data
         }).catch(error => {
         })
@@ -68,6 +70,7 @@ export default function Follower() {
         myFollowing,
         imFollowing,
         myFollowingUsers,
-        imFollowingUsers
+        imFollowingUsers,
+        loading
     }
 }
