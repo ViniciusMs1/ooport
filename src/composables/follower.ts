@@ -2,6 +2,7 @@ import http from "../http/index"
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 import router from "../router"
+import headers from "../http/headers"
 export default function Follower() {
     const isFollowingUser = ref(false)
     const myFollowingUsers = ref([])
@@ -11,7 +12,7 @@ export default function Follower() {
 
     const isFollowing = (id: any) => {
         if (localStorage.getItem('token')) {
-            http.post('isFollowing', { id }).then(response => {
+            http.post('isFollowing', { id }, {headers:headers}).then(response => {
                 isFollowingUser.value = response.data
             }).catch(error => {
 
@@ -22,7 +23,7 @@ export default function Follower() {
 
     const follow = (id: any) => {
         if (localStorage.getItem('token')) {
-            http.post('follow', { id }).then(response => {
+            http.post('follow', { id }, {headers:headers}).then(response => {
             }).catch(error => {
             })
         } else {
@@ -32,7 +33,7 @@ export default function Follower() {
 
     const unFollow = (id: any) => {
         if (localStorage.getItem('token')) {
-            http.post('unFollow', { id }).then(response => {
+            http.post('unFollow', { id }, {headers:headers}).then(response => {
             }).catch(error => {
 
             })
@@ -42,7 +43,7 @@ export default function Follower() {
     }
 
     const myFollowing = () => {
-        http.get('myFollowing').then(response => {
+        http.get('myFollowing', {headers:headers}).then(response => {
             loading.value = false
             myFollowingUsers.value = response.data
         }).catch(error => {
@@ -50,7 +51,7 @@ export default function Follower() {
     }
 
     const imFollowing = () => {
-        http.get('imFollowing').then(response => {
+        http.get('imFollowing', {headers:headers}).then(response => {
             imFollowingUsers.value = response.data
         }).catch(error => {
         })

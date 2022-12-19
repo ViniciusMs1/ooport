@@ -1,13 +1,13 @@
 import http from "../http/index"
 import { ref } from 'vue'
 import Swal from 'sweetalert2'
+import headers from "../http/headers"
 export default function Suggestions() {
     const disabledClick = ref(false)
 
 
     const sendSuggestions = async (data: any) => {
-        await http.post('suggestions', data, {
-        }).then(async response => {
+        await http.post('suggestions', data, { headers: headers }).then(async response => {
             await Swal.fire({
                 title: 'Obrigado',
                 text: "Sugestão enviada com sucesso!",

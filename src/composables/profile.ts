@@ -3,6 +3,7 @@ import { reactive, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import Swal from 'sweetalert2'
 import IUser from "../interface/IUser"
+import headers from "../http/headers"
 export default function Profile() {
     const profile = ref([])
     const errors = ref([])
@@ -12,7 +13,6 @@ export default function Profile() {
     const preview_photo = ref()
     const loading = ref(true)
     const disabledClick = ref(false)
-    const btnFollower = ref(true)
 
 
 
@@ -20,7 +20,7 @@ export default function Profile() {
 
         preview_photo.value = URL.createObjectURL(file)
 
-        http.post('update-photo', form).then(async response => {
+        http.post('update-photo', form, { headers: headers }).then(async response => {
             await Swal.fire({
                 title: 'Sucesso',
                 text: "Imagem alterada com sucesso!",
@@ -34,7 +34,7 @@ export default function Profile() {
     }
 
     const getProfile = async () => {
-        await http.get('me').then(response => {
+        await http.get('me', { headers: headers }).then(response => {
             localStorage.setItem('photo', response.data.photo)
             profile.value = response.data
             loading.value = false
@@ -45,7 +45,7 @@ export default function Profile() {
 
     const viewProfile = (user: String) => {
         if (localStorage.getItem('token')) {
-            http.post('viewProfile', { data: user }).then(response => {
+            http.post('viewProfile', { data: user }, { headers: headers }).then(response => {
                 profile.value = response.data
                 loading.value = false
             }).catch(error => {
@@ -64,7 +64,7 @@ export default function Profile() {
     const updateProfile = async (id: any) => {
 
         try {
-            await http.post('update-user', profile.value)
+            await http.post('update-user', profile.value, { headers: headers })
 
             await Swal.fire({
                 title: 'Sucesso',
@@ -99,7 +99,7 @@ export default function Profile() {
             verify_password.value = true
         } else {
             verify_password.value = false
-            await http.post('update-password', data).then(response => {
+            await http.post('update-password', data, { headers: headers }).then(response => {
                 if (response.data.invalid_current_password) {
                     invalid_current_password.value = true
                 } else {

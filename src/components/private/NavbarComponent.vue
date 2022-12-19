@@ -161,9 +161,7 @@ export default defineComponent({
 
 
       http.get('logout', { headers: headers }).then(response => {
-        localStorage.removeItem('token')
-        localStorage.removeItem('photo')
-        localStorage.removeItem('id')
+        localStorage.clear()
         router.push('/login')
       }).catch(errors => {
         console.log(errors)

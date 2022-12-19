@@ -3,6 +3,7 @@ import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 import Swal from 'sweetalert2'
 import IPortfolio from "../interface/IPortfolio"
+import headers from "../http/headers"
 export default function Portfolio() {
     const portfolios = ref([])
     const portfolio = ref([])
@@ -13,7 +14,7 @@ export default function Portfolio() {
     const getPopularPortfolios = () => {
 
         if (localStorage.getItem('token')) {
-            http.get('getPopularPortfilios').then(response => {
+            http.get('getPopularPortfilios', { headers: headers }).then(response => {
                 portfolios.value = response.data
             }).catch(error => {
                 errors.value = error.message
@@ -34,7 +35,7 @@ export default function Portfolio() {
     const getPortfolios = () => {
 
         if (localStorage.getItem('token')) {
-            http.get('portfolios').then(response => {
+            http.get('portfolios', { headers: headers }).then(response => {
                 portfolios.value = response.data
             }).catch(error => {
                 errors.value = error.message
@@ -51,7 +52,7 @@ export default function Portfolio() {
     }
 
     const my_portfolios = () => {
-        http.get('my_portfolios').then(response => {
+        http.get('my_portfolios', { headers: headers }).then(response => {
             portfolios.value = response.data
         }).catch(error => {
             errors.value = error.message
@@ -59,7 +60,7 @@ export default function Portfolio() {
     }
 
     const getPortfolio = (id: String) => {
-        http.get('portfolios/' + id).then(response => {
+        http.get('portfolios/' + id, { headers: headers }).then(response => {
             portfolio.value = response.data.data
         }).catch(error => {
             if (error.response.status == 403) {
@@ -71,7 +72,7 @@ export default function Portfolio() {
     const storePortfolio = async (data: any) => {
         errors.value = ''
         try {
-            await http.post('/portfolios', data)
+            await http.post('/portfolios', data, { headers: headers })
             await Swal.fire({
                 title: 'Sucesso',
                 text: "Portfólio publicado com sucesso!",
@@ -95,7 +96,7 @@ export default function Portfolio() {
             'existing_files': existing_files
         }
         try {
-            await http.post('/update-portfolio', data)
+            await http.post('/update-portfolio', data, { headers: headers })
 
             await Swal.fire({
                 title: 'Sucesso',
@@ -121,7 +122,7 @@ export default function Portfolio() {
 
 
     const destroyPortfolio = async (id: Number | undefined) => {
-        await http.delete(`/portfolios/${id}`)
+        await http.delete(`/portfolios/${id}`, { headers: headers })
         await Swal.fire({
             title: 'Sucesso',
             text: "Portfólio foi excluido com sucesso!",
