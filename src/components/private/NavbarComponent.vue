@@ -138,6 +138,7 @@ export default defineComponent({
         { name: 'Meus portfólios', href: '/#/my-portfolios', current: false },
         { name: 'Cadastrar portfólio', href: '/#/create-portfolio', current: false },
         { name: 'Seguidores', href: '/#/followers', current: false },
+        { name: 'Mais portfólios', href: '/#/portfolios', current: false },
       ],
       userNavigation: [
         { name: 'Sugestões', href: '/#/suggestions' },
