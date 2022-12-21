@@ -3,7 +3,7 @@
     <div class="max-w-2xl mx-auto py-16 sm:py-24 lg:py-32 lg:max-w-none">
       <h2 class="text-2xl font-extrabold text-gray-900">Portfólios populares</h2>
       <div class="mt-6 space-y-12 lg:space-y-0">
-        <ListPortfolioComponent :btnLike="true" :portfolios=portfolios cols="lg:grid-cols-4" :linkAuthor="true">
+        <ListPortfolioComponent :btnLike="true" :portfolios=portfolioData cols="lg:grid-cols-4" :linkAuthor="true">
         </ListPortfolioComponent>
       </div>
       <div class="text-center mt-12">
@@ -24,10 +24,10 @@ export default defineComponent({
   name: "PortfolioComponent",
   components: { ListPortfolioComponent },
   setup() {
-    const { getPopularPortfolios, portfolios } = Portfolio()
-    onMounted(getPopularPortfolios)
+    const { populares, portfolioData } = Portfolio()
+    onMounted(populares)
     return {
-      portfolios
+      portfolioData
     }
   },
 })

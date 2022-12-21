@@ -8,7 +8,7 @@ export default function Like() {
 
 
     const like = (data: any) => {
-        http.post('like', data, {headers:headers}).then(response => {
+        http.post('like', data, { headers: headers }).then(response => {
             console.log(response)
         }).catch(error => {
 
@@ -16,7 +16,7 @@ export default function Like() {
     }
 
     const dislike = (data) => {
-        http.post('removeLike', data, {headers:headers}).then(response => {
+        http.post('removeLike', data, { headers: headers }).then(response => {
             console.log(response)
         }).catch(error => {
 

@@ -204,19 +204,19 @@ export default defineComponent({
     ListPortfolioComponent
   },
   setup() {
-    const { getPortfolios, portfolios } = Portfolio()
-    onMounted(getPortfolios)
+    const { random, portfolioData } = Portfolio()
+    onMounted(random)
     return {
-      portfolios,
+      portfolioData,
       
     }
   },
   computed: {
     filterCategories() {
       if (!this.checkedCategories.length) {
-        return this.portfolios
+        return this.portfolioData
       }
-      return this.portfolios.filter(j => this.checkedCategories.includes(j.category))
+      return this.portfolioData.filter(j => this.checkedCategories.includes(j.category))
     }
   },
   data() {

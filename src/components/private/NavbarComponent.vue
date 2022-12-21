@@ -114,7 +114,7 @@ import fath from "../../lib/feathercompt";
 import http from "../../http/index"
 import router from "../../router";
 import IUser from "../../interface/IUser";
-import profile from "../../composables/profile";
+import profile from "../../composables/user";
 fath(BellIcon)
 fath(MenuIcon)
 fath(XIcon)

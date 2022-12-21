@@ -1,5 +1,5 @@
 <template>
-  <NavbarComponent :profile="profile" :header-title="sectionName" />
+  <NavbarComponent :profile="profileData" :header-title="sectionName" />
   <ExplanationComponent v-if="!isEmpty" :title="sectionName" :description="explanationDescription" />
 
 
@@ -7,7 +7,7 @@
 
   <div v-else>
     <ContentComponent>
-      <ListPortfolioComponent :portfolios="portfolios" cols="lg:grid-cols-5" :btnEdit="true" :btnLike="false" />
+      <ListPortfolioComponent :portfolios="portfolioData" cols="lg:grid-cols-5" :btnEdit="true" :btnLike="false" />
     </ContentComponent>
 
     <ContentComponent v-if="isEmpty">
@@ -36,7 +36,7 @@ import ListPortfolioComponent from '../../components/private/ListPortfolioCompon
 import ExplanationComponent from '../../components/private/ExplanationComponent.vue'
 import ContentComponent from "../../components/private/ContentComponent.vue"
 import Portfolio from "../../composables/portfolio";
-import Profile from "../../composables/profile";
+import Profile from "../../composables/user";
 import LoaderComponent from "../../components/LoaderComponent.vue";
 
 export default defineComponent({
@@ -44,25 +44,25 @@ export default defineComponent({
   components: { ContentComponent, NavbarComponent, ListPortfolioComponent, ExplanationComponent, LoaderComponent },
   computed: {
     isEmpty(): boolean {
-      return this.profile.portfolio_count === 0
+      return this.profileData.portfolio_count === 0
     }
   },
   setup() {
-    const { errors, portfolios, my_portfolios } = Portfolio()
-    const { profile, getProfile, loading } = Profile()
+    const { errors, portfolioData, fromUser } = Portfolio()
+    const { profileData, me, loading } = Profile()
     const linkCreatePortfolio = ref('create-portfolio')
     const sectionName = ref('Meus portfólios')
     const explanationDescription = ref('Lista completa de Portifólios cadastrados')
-    onMounted(getProfile)
-    onMounted(my_portfolios)
+    onMounted(me)
+    onMounted(fromUser)
     return {
-      my_portfolios,
-      portfolios,
+      fromUser,
+      portfolioData,
       errors,
       linkCreatePortfolio,
       sectionName,
       explanationDescription,
-      profile,
+      profileData,
       loading
     }
   }

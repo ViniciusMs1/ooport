@@ -310,7 +310,6 @@ import { computed } from '@vue/reactivity'
 import ButtonComponent from "../ButtonComponent.vue";
 import IPortfolio from "../../interface/IPortfolio";
 import { RouterLink } from "vue-router";
-import portfolio from "../../composables/portfolio";
 import Lightgallery from 'lightgallery/vue';
 import lgZoom from 'lightgallery/plugins/zoom';
 import lgThumbnail from 'lightgallery/plugins/thumbnail';
@@ -367,29 +366,20 @@ export default defineComponent({
       this.store.commit(VIEW_PORTFOLIO, portfolio)
       this.open = true
     },
-    liked(portfolio: number | undefined) {
+    liked(id: number | undefined) {
       if (!localStorage.getItem('token')) {
         router.push('/login')
       }
       if (this.check) {
+        localStorage.getItem('token') ? http.get('portfolios/deslike/' + id) : null
         this.check = false
-        http.post('removeLike', { portfolio }).then(response => {
-
-
-        }).catch(error => {
-          console.log('Falha ao remover o like ' + error)
-        })
-        const index = this.portfolios.map(e => e.id).indexOf(portfolio);
+        const index = this.portfolios.map(e => e.id).indexOf(id);
         this.portfolios[index].likes_exists = false
         this.portfolios[index].likes_count_count--
       } else {
+        localStorage.getItem('token') ? http.get('portfolios/like/' + id) : null
         this.check = true
-        http.post('like', { portfolio }).then(response => {
-
-        }).catch(error => {
-          console.log('Falha ao dar like ' + error)
-        })
-        const index = this.portfolios.map(e => e.id).indexOf(portfolio);
+        const index = this.portfolios.map(e => e.id).indexOf(id);
         this.portfolios[index].likes_exists = true
         this.portfolios[index].likes_count_count++
       }

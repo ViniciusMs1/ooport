@@ -1,5 +1,5 @@
 <template>
-    <NavbarComponent :profile="profile" />
+    <NavbarComponent :profile="profileData" />
     <ContentComponent hidden>
         <div class="relative block p-8 border border-gray-100 shadow-xl rounded-xl" href="">
             <div class="text-gray-500 sm:pr-8 text-center">
@@ -15,11 +15,11 @@
         </div>
     </ContentComponent>
     <ExplanationComponent :title="explanationTitle" />
-
-    <LoaderComponent v-if="loading"/>
+    <LoaderComponent v-if="loading" />
 
     <ContentComponent v-else>
-        <FormEditPortfolioComponent @savePortfolio="savePortfolio" :categories='categories' :portfolio='portfolio' />
+        <FormEditPortfolioComponent @savePortfolio="savePortfolio" :categories='categories'
+            :portfolio='portfolioData' />
     </ContentComponent>
 </template>
 <script lang="ts">
@@ -30,7 +30,7 @@ import ExplanationComponent from '../../components/private/ExplanationComponent.
 import ContentComponent from "../../components/private/ContentComponent.vue"
 import Portfolio from '../../composables/portfolio'
 import Category from '../../composables/category';
-import Profile from '../../composables/profile';
+import Profile from '../../composables/user';
 import LoaderComponent from '../../components/LoaderComponent.vue';
 export default defineComponent({
     name: 'EditPortfolioView',
@@ -42,17 +42,17 @@ export default defineComponent({
         }
     },
     setup(props) {
-        const { getPortfolio, portfolio, updatePortfolio, errors, disabledClick } = Portfolio()
-        const { profile, getProfile, loading } = Profile()
+        const { portfolio, portfolioData, update, errors, disabledClick } = Portfolio()
+        const { profile, me, loading, profileData } = Profile()
         const { categories, getCategories } = Category()
         const explanationTitle = ref('Editar portfólio')
         const savePortfolio = async (id: String, files: Object, existing_files: Object) => {
             disabledClick.value = true
-            await updatePortfolio(id, files, existing_files)
+            await update(id, files, existing_files)
         }
-        onMounted(() => getPortfolio(props.id))
+        onMounted(() => portfolio(props.id))
         onMounted(getCategories)
-        onMounted(getProfile)
+        onMounted(me)
         return {
             errors,
             categories,
@@ -61,7 +61,9 @@ export default defineComponent({
             explanationTitle,
             profile,
             disabledClick,
-            loading
+            loading,
+            portfolioData,
+            profileData
         }
     }
 })

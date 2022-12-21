@@ -1,5 +1,5 @@
 <template>
-  <NavbarComponent :profile="profile" :header-title="sectionName" />
+  <NavbarComponent :profile="profileData" :header-title="sectionName" />
   <ExplanationComponent :title="sectionName" :description="explanationDescription" />
 
   <LoaderComponent v-if="loading" />
@@ -7,10 +7,10 @@
   <ContentComponent v-else>
     <div class="grid sm:grid-cols-10 gap-4">
       <div class="sm:col-span-3">
-        <CardProfileComponent class="sticky top-10" :profile="profile" />
+        <CardProfileComponent class="sticky top-10" :profile="profileData" />
       </div>
       <div class="sm:col-span-7">
-        <FormProfileComponent @saveProfile="saveProfile" :profile="profile" />
+        <FormProfileComponent @saveProfile="saveProfile" :profile="profileData" />
       </div>
     </div>
   </ContentComponent>
@@ -22,25 +22,25 @@ import FormProfileComponent from '../../components/private/FormProfileComponent.
 import ExplanationComponent from "../../components/private/ExplanationComponent.vue";
 import ContentComponent from '../../components/private/ContentComponent.vue';
 import CardProfileComponent from '../../components/private/CardProfileComponent.vue';
-import Profile from '../../composables/profile'
+import Profile from '../../composables/user'
 import LoaderComponent from '../../components/LoaderComponent.vue';
 export default defineComponent({
   name: 'MyProfileView',
   components: { NavbarComponent, FormProfileComponent, ExplanationComponent, ContentComponent, CardProfileComponent, LoaderComponent },
   setup() {
-    const { errors, profile, getProfile, updateProfile, loading } = Profile()
+    const { errors, profileData, me, update, loading } = Profile()
     const sectionName = ref('Meu perfil')
     const explanationDescription = ref('Confira e edite seus dados pessoais quando quiser')
-    onMounted(getProfile)
-    const saveProfile = async (id: any) => {
-      await updateProfile(id)
+    onMounted(me)
+    const saveProfile = async () => {
+      await update()
     }
     return {
       errors,
       saveProfile,
-      updateProfile,
-      profile,
-      getProfile,
+      update,
+      profileData,
+      me,
       sectionName,
       explanationDescription,
       loading

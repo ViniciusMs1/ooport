@@ -3,7 +3,7 @@
   <div class="mx-auto sm:px-11">
     <div class="md:grid md:grid-cols-1 md:gap-6">
       <div class="md:mt-0 md:col-span-2">
-        <form v-on:submit.prevent="savePortfolio">
+        <form v-on:submit.prevent="addPortfolio">
           <div class="shadow overflow-hidden sm:rounded-md">
             <div class="px-4 py-5 bg-white sm:p-6 flex flex-col space-y-4">
               <div class="grid sm:grid-cols-2 grid-cols-1 gap-4">
@@ -76,14 +76,14 @@
             <div class="px-4 py-3 bg-gray-50 text-right sm:px-6">
               <button :disabled=disabledClick type="submit"
                 class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                <svg v-if="disabledClick" class="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none"
-                  viewBox="0 0 24 24">
+                <svg v-if="disabledClick" class="animate-spin -ml-1 mr-3 h-5 w-5 text-white"
+                  xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                   <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
                   <path class="opacity-75" fill="currentColor"
                     d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z">
                   </path>
                 </svg>
-                 {{ disabledClick ? 'Publicando...' : 'Publicar'  }}
+                {{ disabledClick ? 'Publicando...' : 'Publicar' }}
               </button>
             </div>
           </div>
@@ -98,7 +98,7 @@
 <script lang="ts">
 import { defineComponent, onMounted, PropType, reactive, ref } from "vue"
 import Portifolio from '../../composables/portfolio'
-import profile from "../../composables/profile"
+import profile from "../../composables/user"
 import IUser from "../../interface/IUser"
 import ImagePreviewComponent from "./ImagePreviewComponent.vue"
 export default defineComponent({
@@ -125,7 +125,7 @@ export default defineComponent({
   setup() {
     let files: object[] = []
     const uploadFilho = ref()
-    const { portfolios, storePortfolio, disabledClick } = Portifolio()
+    const { store, disabledClick } = Portifolio()
 
     const form = reactive({
       title: '',
@@ -138,17 +138,16 @@ export default defineComponent({
       category: '',
     })
 
-    const savePortfolio = async () => {
+    const addPortfolio = async () => {
       disabledClick.value = true
       form.images = uploadFilho.value.getFiles()
-      await storePortfolio({ ...form })
+      await store({ ...form })
     }
 
     return {
-      savePortfolio,
+      addPortfolio,
       form,
-      portfolios,
-      storePortfolio,
+      store,
       files,
       uploadFilho,
       disabledClick

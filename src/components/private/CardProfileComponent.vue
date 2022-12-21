@@ -74,7 +74,7 @@
 </template>
 <script lang="ts">
 import { defineComponent, onMounted, PropType } from 'vue';
-import Profile from '../../composables/profile'
+import Profile from '../../composables/user'
 import moment from 'moment'
 import IUser from '../../interface/IUser';
 export default defineComponent({

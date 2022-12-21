@@ -1,8 +1,8 @@
 <template>
-    <NavbarComponent :profile="profile" :header-title="sectionName" />
+    <NavbarComponent :profile="profileData" :header-title="sectionName" />
     <ExplanationComponent :title="explanationTitle" :description="explanationDescription" />
     <ContentComponent>
-        <FormPortfolioComponent :categories="categories" :profile="profile" />
+        <FormPortfolioComponent :categories="categories" :profile="profileData" />
     </ContentComponent>
 </template>
 <script lang="ts">
@@ -12,7 +12,7 @@ import ListPortfolioComponent from '../../components/private/ListPortfolioCompon
 import FormPortfolioComponent from "../../components/private/FormPortfolioComponent.vue";
 import ExplanationComponent from '../../components/private/ExplanationComponent.vue'
 import ContentComponent from "../../components/private/ContentComponent.vue";
-import Profile from "../../composables/profile"
+import Profile from "../../composables/user"
 import Category from "../../composables/category";
 export default defineComponent({
     name: 'CreatePortfoilioView',
@@ -25,14 +25,15 @@ export default defineComponent({
         }
     },
     setup() {
-        const { profile, getProfile } = Profile()
+        const { profile, me, profileData } = Profile()
         const { errors, categories, getCategories } = Category()
         onMounted(getCategories)
-        onMounted(getProfile)
+        onMounted(me)
 
         return {
             profile,
-            categories
+            categories,
+            profileData
         }
     }
 })

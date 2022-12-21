@@ -1,5 +1,5 @@
 <template>
-  <NavbarComponent :profile="profile" :header-title="sectionName" />
+  <NavbarComponent :profile="profileData" :header-title="sectionName" />
   <ExplanationComponent :title="sectionName" :description="explanationDescription" />
 
   <ContentComponent>
@@ -54,7 +54,7 @@
 import { defineComponent, ref, onMounted, reactive } from 'vue';
 import NavbarComponent from '../../components/private/NavbarComponent.vue'
 import ExplanationComponent from "../../components/private/ExplanationComponent.vue";
-import Profile from '../../composables/profile';
+import Profile from '../../composables/user';
 import ContentComponent from '../../components/private/ContentComponent.vue';
 import Suggestions from '../../composables/suggestions';
 export default defineComponent({
@@ -63,9 +63,9 @@ export default defineComponent({
   setup() {
     const sectionName = ref('Sugestões')
     const explanationDescription = ref('Possui uma sugestão ou crítica sobre a plataforma')
-    const { profile, getProfile } = Profile()
+    const { profileData, me } = Profile()
     const { sendSuggestions, disabledClick } = Suggestions()
-    onMounted(getProfile)
+    onMounted(me)
     const form = reactive({
       title: '',
       details: '',
@@ -81,7 +81,7 @@ export default defineComponent({
     return {
       sectionName,
       explanationDescription,
-      profile,
+      profileData,
       saveSuggestions,
       form,
       sendSuggestions,

@@ -1,5 +1,5 @@
 <template>
-    <NavbarComponent :profile="profile" />
+    <NavbarComponent :profile="profileData" />
     <ExplanationComponent :title="explanationTitle" />
     <LoaderComponent v-if="loading" />
 
@@ -10,7 +10,7 @@
 <script lang="ts">
 import { defineComponent, onMounted, ref } from 'vue';
 import NavbarComponent from '../../components/private/NavbarComponent.vue'
-import Profile from '../../composables/profile';
+import Profile from '../../composables/user';
 import ExplanationComponent from '../../components/private/ExplanationComponent.vue'
 import ContentComponent from "../../components/private/ContentComponent.vue"
 import FollowerComponent from "../../components/private/FollowerComponent.vue"
@@ -20,14 +20,14 @@ export default defineComponent({
     name: 'FollowerView',
     components: { NavbarComponent, ExplanationComponent, ContentComponent, FollowerComponent, LoaderComponent },
     setup() {
-        const { profile, getProfile } = Profile()
+        const { profileData, me } = Profile()
         const { myFollowing, imFollowing, myFollowingUsers, imFollowingUsers, loading } = Follower()
         const explanationTitle = ref('Seguidores')
-        onMounted(getProfile)
+        onMounted(me)
         onMounted(imFollowing)
         onMounted(myFollowing)
         return {
-            profile,
+            profileData,
             loading,
             explanationTitle,
             myFollowingUsers,

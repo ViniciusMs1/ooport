@@ -2,66 +2,57 @@ import http from "../http/index"
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 import Swal from 'sweetalert2'
-import IPortfolio from "../interface/IPortfolio"
 import headers from "../http/headers"
 export default function Portfolio() {
-    const portfolios = ref([])
-    const portfolio = ref([])
+    const portfolioData = ref([])
     const errors = ref('')
     const router = useRouter()
     const disabledClick = ref(false)
 
-    const getPopularPortfolios = () => {
-
+    const populares = () => {
         if (localStorage.getItem('token')) {
-            http.get('getPopularPortfilios', { headers: headers }).then(response => {
-                portfolios.value = response.data
+            http.get('portfolios/populares', { headers: headers }).then(response => {
+                portfolioData.value = response.data
             }).catch(error => {
                 errors.value = error.message
             })
         } else {
-            http.get('getPopularPortfiliosN').then(response => {
-                portfolios.value = response.data
+            http.get('no-auth/portfolios/populares').then(response => {
+                portfolioData.value = response.data
             }).catch(error => {
                 errors.value = error.message
             })
         }
-
-
-
     }
 
 
-    const getPortfolios = () => {
-
+    const random = () => {
         if (localStorage.getItem('token')) {
-            http.get('portfolios', { headers: headers }).then(response => {
-                portfolios.value = response.data
+            http.get('portfolios/random', { headers: headers }).then(response => {
+                portfolioData.value = response.data
             }).catch(error => {
                 errors.value = error.message
             })
         } else {
-            http.get('portfoliosN').then(response => {
-                portfolios.value = response.data
+            http.get('no-auth/portfolios/random').then(response => {
+                portfolioData.value = response.data
             }).catch(error => {
                 errors.value = error.message
             })
         }
-
-
     }
 
-    const my_portfolios = () => {
-        http.get('my_portfolios', { headers: headers }).then(response => {
-            portfolios.value = response.data
+    const fromUser = () => {
+        http.get('portfolios/fromUser', { headers: headers }).then(response => {
+            portfolioData.value = response.data
         }).catch(error => {
             errors.value = error.message
         })
     }
 
-    const getPortfolio = (id: String) => {
-        http.get('portfolios/' + id, { headers: headers }).then(response => {
-            portfolio.value = response.data.data
+    const portfolio = (id: String) => {
+        http.get('portfolio/' + id, { headers: headers }).then(response => {
+            portfolioData.value = response.data
         }).catch(error => {
             if (error.response.status == 403) {
                 router.push('/my-portfolios')
@@ -69,80 +60,67 @@ export default function Portfolio() {
         })
     }
 
-    const storePortfolio = async (data: any) => {
+    const store = async (data: any) => {
         errors.value = ''
-        try {
-            await http.post('/portfolios', data, { headers: headers })
+        await http.post('/portfolio', data, { headers: headers }).then(async response => {
             await Swal.fire({
-                title: 'Sucesso',
-                text: "Portfólio publicado com sucesso!",
-                icon: 'success',
-
+                title: response.data.title,
+                text: response.data.text,
+                icon: response.data.icon
             });
+        }).catch(error => {
+            console.log(error)
+        }).then(async () => {
             await router.push('/my-portfolios')
-        } catch (e: any) {
-            disabledClick.value = false
-            if (e.response.status === 422) {
-                errors.value = e.response.data.errors
-            }
-        }
+        })
     }
 
 
-    const updatePortfolio = async (id: String, files: Object, existing_files: Object) => {
+    const update = async (id: String, files: Object, existing_files: Object) => {
         let data = {
-            'portfolio': portfolio.value,
+            'portfolio': portfolioData.value,
             'files': files,
             'existing_files': existing_files
         }
-        try {
-            await http.post('/update-portfolio', data, { headers: headers })
-
+        await http.post('portfolios/update', data, { headers: headers }).then(async response => {
             await Swal.fire({
-                title: 'Sucesso',
-                text: "Seu portfólio foi atualizado com sucesso!",
-                icon: 'success',
-
+                title: response.data.title,
+                text: response.data.text,
+                icon: response.data.icon
             });
+        }).catch(error => {
+            console.log(error)
+        }).then(async () => {
             await router.push('/my-portfolios')
-
-        } catch (e: any) {
-            await Swal.fire({
-                title: 'Erro',
-                text: "Não foi possível atualizar seu portfólio.",
-                icon: 'warning',
-
-            });
-            await router.push('/my-portfolios')
-            for (const key in e.response.data.errors) {
-                // errors.value += e.response.data.errors[key][0] + ' ';
-            }
-        }
+        })
     }
 
 
-    const destroyPortfolio = async (id: Number | undefined) => {
-        await http.delete(`/portfolios/${id}`, { headers: headers })
-        await Swal.fire({
-            title: 'Sucesso',
-            text: "Portfólio foi excluido com sucesso!",
-            icon: 'success',
-        });
-        await router.push('/my-portfolios')
+    const destroy = async (id: Number | undefined) => {
+        await http.delete(`/portfolio/${id}`, { headers: headers }).then(async response => {
+            await Swal.fire({
+                title: response.data.title,
+                text: response.data.text,
+                icon: response.data.icon
+            });
+        }).catch(error => {
+            console.log(error)
+        }).then(async () => {
+            await router.push('/my-portfolios')
+        })
     }
 
 
     return {
-        my_portfolios,
-        updatePortfolio,
-        storePortfolio,
-        portfolios,
-        portfolio,
+        fromUser,
+        update,
+        store,
+        portfolioData,
         errors,
-        getPortfolios,
-        getPortfolio,
-        destroyPortfolio,
-        getPopularPortfolios,
+        random,
+        portfolio,
+        destroy,
+        populares,
         disabledClick,
     }
 }

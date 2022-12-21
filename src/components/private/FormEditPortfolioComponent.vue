@@ -112,7 +112,7 @@ export default defineComponent({
     }
   },
   setup() {
-    const { destroyPortfolio } = Portfolio()
+    const { destroy } = Portfolio()
     const deletePortfolio = async (id: Number | undefined) => {
 
       Swal.fire({
@@ -126,7 +126,7 @@ export default defineComponent({
         cancelButtonText: "Cancelar",
       }).then(async (result) => {
         if (result.isConfirmed) {
-          await destroyPortfolio(id)
+          await destroy(id)
         }
       })
     }

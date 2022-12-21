@@ -2,7 +2,7 @@
   <div class="mx-auto sm:px-11">
     <div class="md:grid md:grid-cols-1 md:gap-6">
       <div class="mt-5 md:mt-0 md:col-span-2">
-        <form v-on:submit.prevent="saveProfile(profile.id)">
+        <form v-on:submit.prevent="saveProfile">
           <div class="shadow overflow-hidden sm:rounded-md">
             <div class="px-4 py-5 bg-white sm:p-6 flex flex-col space-y-4">
               <div class="grid sm:grid-cols-2 grid-cols-1 gap-4">
@@ -153,15 +153,15 @@
 </template>
 <script lang="ts">
 import { defineComponent, PropType, reactive } from "vue";
-import profile from "../../composables/profile";
-import Profile from "../../composables/profile";
+import profile from "../../composables/user";
+import Profile from "../../composables/user";
 import IUser from "../../interface/IUser";
 export default defineComponent({
   name: 'FormPortfolioComponent',
   emits: ['saveProfile'],
   methods: {
-    saveProfile(id: any) {
-      this.$emit('saveProfile', id)
+    saveProfile() {
+      this.$emit('saveProfile')
     }
   },
   props: {
@@ -170,7 +170,7 @@ export default defineComponent({
       required: true
     }
   },
-  setup(props) {
+  setup() {
     const { updatePassword, verify_password, invalid_current_password, disabledClick } = Profile()
     const form = reactive({
       current_password: '',
@@ -181,7 +181,7 @@ export default defineComponent({
 
     const updatePasswordC = async () => {
       disabledClick.value = true
-      await updatePassword({ ...form }, props.profile?.id)
+      await updatePassword({ ...form })
       form.current_password = ''
       form.new_password = ''
       form.confirm_password = ''
