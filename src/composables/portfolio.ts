@@ -9,6 +9,22 @@ export default function Portfolio() {
     const router = useRouter()
     const disabledClick = ref(false)
     const loading = ref(true)
+    const imgRandom = ref()
+
+
+    const randomImagem = () => {
+        var imgRandomArray = [
+            "https://cdn.pixabay.com/photo/2018/04/29/07/59/flowers-3359253_1280.png",
+            "https://cdn.pixabay.com/photo/2022/11/30/01/25/christmas-7625680_1280.jpg",
+            "https://cdn.pixabay.com/photo/2022/11/30/01/16/christmas-7625666_1280.jpg",
+            "https://cdn.pixabay.com/photo/2019/06/22/00/10/postcard-memories-4290548_1280.jpg",
+            "https://cdn.pixabay.com/photo/2019/05/01/01/03/vintage-4169862_1280.jpg",
+            "https://cdn.pixabay.com/photo/2019/01/09/14/13/leaves-3923413_1280.jpg",
+            "https://images.unsplash.com/photo-1551434678-e076c223a692?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2850&q=80",
+        ]
+        imgRandom.value = imgRandomArray[Math.floor(Math.random() * 7)]
+    }
+
 
     const populares = () => {
         if (localStorage.getItem('token')) {
@@ -127,6 +143,8 @@ export default function Portfolio() {
         destroy,
         populares,
         disabledClick,
-        loading
+        loading,
+        randomImagem,
+        imgRandom
     }
 }
