@@ -1,5 +1,9 @@
 <template>
-  
+
+
+
+
+
   <div class="">
     <div class="">
       <!-- Mobile filter dialog -->
@@ -107,7 +111,7 @@
           </div>
         </div>
 
-        
+
 
         <section aria-labelledby="products-heading" class="pt-6 pb-24">
           <h2 id="products-heading" class="sr-only">Products</h2>
@@ -147,7 +151,8 @@
             <div class="lg:col-span-3">
               <!-- Replace with your content -->
               <div class="rounded-lg lg:h-full">
-                <ListPortfolioComponent :linkAuthor="true" :portfolios="filterCategories" cols="lg:grid-cols-3"
+                <LoaderComponent v-if="loading" />
+                <ListPortfolioComponent v-else :linkAuthor="true" :portfolios="filterCategories" cols="lg:grid-cols-3"
                   :btnEdit="false" :btnLike="true" />
               </div>
               <!-- /End replace -->
@@ -177,6 +182,7 @@ import {
 } from '@headlessui/vue'
 import ListPortfolioComponent from './ListPortfolioComponent.vue';
 import Portfolio from '../../composables/portfolio';
+import LoaderComponent from '../LoaderComponent.vue';
 feathercompt(ChevronDownIcon)
 feathercompt(MinusIcon)
 feathercompt(PlusIcon)
@@ -201,14 +207,15 @@ export default defineComponent({
     PlusIcon,
     AdjustmentsIcon,
     XIcon,
-    ListPortfolioComponent
+    ListPortfolioComponent,
+    LoaderComponent
   },
   setup() {
-    const { random, portfolioData } = Portfolio()
+    const { random, portfolioData, loading } = Portfolio()
     onMounted(random)
     return {
       portfolioData,
-      
+      loading
     }
   },
   computed: {

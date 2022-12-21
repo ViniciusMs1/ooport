@@ -8,17 +8,20 @@ export default function Portfolio() {
     const errors = ref('')
     const router = useRouter()
     const disabledClick = ref(false)
+    const loading = ref(true)
 
     const populares = () => {
         if (localStorage.getItem('token')) {
             http.get('portfolios/populares', { headers: headers }).then(response => {
                 portfolioData.value = response.data
+                loading.value = false
             }).catch(error => {
                 errors.value = error.message
             })
         } else {
             http.get('no-auth/portfolios/populares').then(response => {
                 portfolioData.value = response.data
+                loading.value = false
             }).catch(error => {
                 errors.value = error.message
             })
@@ -30,12 +33,14 @@ export default function Portfolio() {
         if (localStorage.getItem('token')) {
             http.get('portfolios/random', { headers: headers }).then(response => {
                 portfolioData.value = response.data
+                loading.value = false
             }).catch(error => {
                 errors.value = error.message
             })
         } else {
             http.get('no-auth/portfolios/random').then(response => {
                 portfolioData.value = response.data
+                loading.value = false
             }).catch(error => {
                 errors.value = error.message
             })
@@ -122,5 +127,6 @@ export default function Portfolio() {
         destroy,
         populares,
         disabledClick,
+        loading
     }
 }

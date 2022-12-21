@@ -3,7 +3,10 @@
     <div class="max-w-2xl mx-auto py-16 sm:py-24 lg:py-32 lg:max-w-none">
       <h2 class="text-2xl font-extrabold text-gray-900">Portfólios populares</h2>
       <div class="mt-6 space-y-12 lg:space-y-0">
-        <ListPortfolioComponent :btnLike="true" :portfolios=portfolioData cols="lg:grid-cols-4" :linkAuthor="true">
+
+        <LoaderComponent v-if="loading"/>
+
+        <ListPortfolioComponent v-else :btnLike="true" :portfolios=portfolioData cols="lg:grid-cols-4" :linkAuthor="true">
         </ListPortfolioComponent>
       </div>
       <div class="text-center mt-12">
@@ -19,15 +22,17 @@
 import { defineComponent, onMounted } from "vue";
 import { RouterLink } from "vue-router";
 import Portfolio from "../composables/portfolio";
+import LoaderComponent from "./LoaderComponent.vue";
 import ListPortfolioComponent from "./private/ListPortfolioComponent.vue";
 export default defineComponent({
   name: "PortfolioComponent",
-  components: { ListPortfolioComponent },
+  components: { ListPortfolioComponent, LoaderComponent },
   setup() {
-    const { populares, portfolioData } = Portfolio()
+    const { populares, portfolioData, loading } = Portfolio()
     onMounted(populares)
     return {
-      portfolioData
+      portfolioData,
+      loading
     }
   },
 })
