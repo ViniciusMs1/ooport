@@ -215,7 +215,7 @@ export default defineComponent({
             'user': props.profile.id,
             'ip': ip
           }
-          localStorage.getItem('id') != props.profile.id ? http.post('user/visitor', data) : null
+          localStorage.getItem('id') != props.profile.id ? http.post('no-auth/user/visitor', data) : null
         });
     }
 
