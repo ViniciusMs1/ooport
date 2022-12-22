@@ -57,6 +57,32 @@
             </p>
           </div>
         </li>
+        <li class="py-3 sm:py-4">
+          <div class="flex items-center space-x-7">
+            <div class="flex-1 min-w-0">
+              <p class="text-sm font-medium truncate ">
+                Seguidores
+              </p>
+            </div>
+            <p class="text-sm">
+              {{ profile?.following_count }}
+            </p>
+          </div>
+        </li>
+        <li class="py-3 sm:py-4">
+          <div class="flex items-center space-x-7">
+            <div class="flex-1 min-w-0">
+              <p class="text-sm font-medium truncate ">
+                Visitantes
+                <br>
+                <small>Mês atual</small>
+              </p>
+            </div>
+            <p class="text-sm">
+              {{ Object.keys(profile?.visitor).length }}
+            </p>
+          </div>
+        </li>
         <!-- <li class="py-3 sm:py-4">
           <div class="flex items-center space-x-7">
             <div class="flex-1 min-w-0">

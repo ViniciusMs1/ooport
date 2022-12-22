@@ -1,7 +1,7 @@
 <template>
 
 
-
+  {{ visitor }}
 
   <div class="sticky top-10 p-4 bg-white shadow-lg rounded-2xl w-full dark:bg-gray-800 mb-5">
     <div class="flex flex-row items-start gap-4">
@@ -191,6 +191,7 @@
 <script lang="ts">
 import { defineComponent, onMounted } from 'vue';
 import Follower from '../../composables/follower';
+import http from '../../http';
 import IUser from '../../interface/IUser';
 export default defineComponent({
   name: 'CardUserComponent',
@@ -204,6 +205,21 @@ export default defineComponent({
       id: localStorage.getItem('id')
     }
   },
+  computed: {
+    visitor(props: { profile: { id: any; }; }) {
+      fetch('https://api.ipify.org?format=json')
+        .then(x => x.json())
+        .then(({ ip }) => {
+          this.term = ip;
+          let data = {
+            'user': props.profile.id,
+            'ip': ip
+          }
+          localStorage.getItem('id') != props.profile.id ? http.post('user/visitor', data) : null
+        });
+    }
+
+  },
   props: {
     profile: {
       required: true,
@@ -212,7 +228,6 @@ export default defineComponent({
   },
   setup(props) {
     const { isFollowing, isFollowingUser, follow, unFollow } = Follower()
-
 
     const followUser = async () => {
       props.profile.following_count++

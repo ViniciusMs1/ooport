@@ -47,6 +47,7 @@ export default function Profile() {
 
     const me = async () => {
         await http.get('user/me', { headers: headers }).then(response => {
+            console.log(response.data)
             localStorage.setItem('photo', response.data.photo)
             profileData.value = response.data
             loading.value = false

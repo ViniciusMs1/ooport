@@ -7,7 +7,8 @@
         <CardUserComponentVue class="sticky top-10" :profile="profileData" />
       </div>
       <div class="sm:col-span-7">
-        <ListPortfolioComponent :portfolios="profileData['portfolio']" cols="lg:grid-cols-3" :btnEdit="false" :btnLike="true" />
+        <ListPortfolioComponent :portfolios="profileData['portfolio']" cols="lg:grid-cols-3" :btnEdit="false"
+          :btnLike="true" />
       </div>
     </div>
   </ContentComponent>
