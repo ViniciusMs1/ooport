@@ -8,28 +8,14 @@ const Http = axios.create({
 })
 
 
-
-
-
-
-Http.interceptors.response.use(
-    response => {
-        return response
-    },
-    async error => {
-        if (error.response.status == 401) {
-            localStorage.clear()
-            router.push('')
-            // Http.get('/refresh')
-            //     .then(response => {
-            //         localStorage.setItem('token', response.data)
-            //         // location.reload()
-            //     }).catch(error => {
-            //         console.log('Error => ' + error)
-            //     })
-        }
-        return error
+Http.interceptors.response.use(response => {
+    return response;
+}, error => {
+    if (error.response.status === 401) {
+        localStorage.clear()
+        location.reload()
     }
-)
+    return Promise.reject(error);
+});
 
 export default Http
